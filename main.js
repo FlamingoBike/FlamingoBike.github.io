@@ -8,7 +8,12 @@ const itemsDiv = document.getElementById("items-display");
 function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
     for (const item of itemsToDisplay) {
-        itemsDiv.insertAdjacentHTML("beforeend", `<div class="item">${item["name"]}</div>&nbsp;`);
+        itemsDiv.insertAdjacentHTML("beforeend", 
+        `<div class="item">` +
+        `<h3>${item["name"]}</h3>` +
+        `<p>${item["addLore"]}<p>` +
+        `</div>`
+        );
     }
 }
 
