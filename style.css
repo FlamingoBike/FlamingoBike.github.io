@@ -1,3 +1,20 @@
+/* LOAD FONTS */
+@font-face {
+    font-family: 'Roboto', sans-serif;
+    src: url('webfonts/Roboto-Regular.ttf');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Roboto', sans-serif;
+    src: url('webfonts/Roboto-Bold.ttf');
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'Roboto', sans-serif;
+    src: url('webfonts/Roboto-Light.ttf');
+    font-weight: 300;
+}
+
 body {
     /* Remove margin from body */
     margin: 0;
@@ -5,6 +22,9 @@ body {
     /* Set page background color and font color */
     background-color: #101010;
     color: #ECECEC;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 header {
@@ -24,4 +44,52 @@ header h1 {
 
 .fl-column {
     flex-direction: column;
+}
+
+#items-display.loading .loader{
+    display: flex;
+}
+
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    display: none;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bar {
+    width: 10px;
+    height: 5px;
+    background: #10c15c;
+    margin: 2px;
+    animation: bar 1s infinite linear;
+}
+
+.loader .bar:nth-child(1){
+   animation-delay: 0s;
+}
+
+.loader .bar:nth-child(2) {
+     animation-delay: 0.25s;
+ }
+
+.loader .bar:nth-child(3) {
+     animation-delay: 0.5s;
+}
+
+@keyframes bar {
+    0% {
+        transform: scaleY(1) scaleX(0.5);
+    }
+
+    50% {
+        transform: scaleY(10) scaleX(1);
+    }
+
+    100% {
+        transform: scaleY(1) scaleX(0.5);
+    }
 }
