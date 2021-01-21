@@ -7,12 +7,15 @@
     </head>
     <body onload="requestItems()">
         <header>
-        <h1>Wynncraft Items</h1>
-        <input type="text" id="search" placeholder="search..."/>
+            <h1>Wynncraft Items</h1>
         </header>
-        <div class="flex" id="items-display"></div>
-
-        <button onclick="update()" id="search-btn">Search</button>
+        <div class="search">
+            <h4>Search:</h4>
+            <input type="text" id="search" placeholder="search..." />
+            <button onclick="update()" id="search-btn">Search</button>
+        </div>
+        <div class="flex fl-row fl-wrap" id="items-display"></div>
+        
         <script src="main.js"></script>
     </body>
 </html>
