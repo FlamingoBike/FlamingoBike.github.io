@@ -72,10 +72,15 @@ header h1 {
     flex-wrap: wrap;
 }
 
-#items-display div {
+#items-display .item {
     margin: 10px;
-    background-color: #252525;
     padding: 10px;
+
+    width: 250px;
+
+    background-color: #252525;
+
+    text-align: center;
 }
 
 #items-display.loading .loader{
