@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Wynncraft Item Display</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="libs/jquery.js"></script>
-  </head>
-  <body onload="requestItems()">
-    <header>
-      <h1>Wynncraft Items</h1>
-    </header>
-    <div class="flex" id="items-display"></div>
-    <script src="main.js"></script>
-  </body>
+    <head>
+        <title>Wynncraft Item Display</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="libs/jquery.js"></script>
+    </head>
+    <body onload="requestItems()">
+        <header>
+        <h1>Wynncraft Items</h1>
+        <input type="text" id="search" placeholder="search..."/>
+        </header>
+        <div class="flex" id="items-display"></div>
+
+        <button onclick="update()" id="search-btn">Search</button>
+        <script src="main.js"></script>
+    </body>
 </html>
