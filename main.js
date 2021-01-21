@@ -32,7 +32,6 @@ function update() {
 
 function finishedLoading() {
     loaded = true;
-    loaded = true;
     isLoaded();
     updateItemDisplay(allItems);
 }
@@ -44,20 +43,13 @@ function requestItems() {
             allItems = data["items"];
             finishedLoading();
         }
-    })
-    $.ajax({
-        url: "https://api.wynncraft.com/public_api.php?action=itemDB&category=all",
-        success: (data) => {
-            allItems = data["items"];
-            finishedLoading();
-        }
     });
     isLoaded();
 }
 
-function isLoaded(){
+function isLoaded() {
     let itemsDisplay = document.querySelector('#items-display');
-    if(loaded !== true){
+    if (loaded !== true) {
         itemsDisplay.classList.add('loading');
     } else {
         itemsDisplay.classList.remove('loading');
