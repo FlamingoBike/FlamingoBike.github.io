@@ -1,0 +1,23 @@
+body {
+    /* Remove margin from body */
+    margin: 0;
+
+    /* Set page background color and font color */
+    background-color: #101010;
+    color: #ECECEC;
+}
+
+header {
+    position: static;
+    background-color: #252525;
+    padding: 10px;
+}
+
+header h1 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+}
