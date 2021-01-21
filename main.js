@@ -42,7 +42,7 @@ function convertIds() {
                         item[id]["min"] = 1;
                     }
                 } else {
-                    item[id] = {min: Math.floor(item[id] * 0.7), max: Math.floor(item[id] * 1.3)};
+                    item[id] = {min: Math.floor(item[id] * 1.3), max: Math.floor(item[id] * 0.7)};
                     if (item[id]["max"] > -1) {
                         item[id]["max"] = -1;
                     }
@@ -56,7 +56,7 @@ function finishedLoading() {
     loaded = true;
     isLoaded();
     updateItemDisplay(allItems);
-    //console.log(allItems.find((i) => {return i["name"] === "Divzer"}));
+    console.log(allItems.find((i) => {return i["name"] === "Divzer"}));
 }
 
 function requestItems() {
