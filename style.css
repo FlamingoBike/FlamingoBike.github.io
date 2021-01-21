@@ -52,6 +52,41 @@ header h1 {
     background-color: #252525;
 }
 
+#search{
+    padding: 10px 15px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border: none;
+}
+
+#search:focus{
+    outline: none;
+}
+
+#search-btn{
+    padding: 10px 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    appearance: none;
+    border-width: 0;
+    border-style: solid;
+    border-color: #dadada;
+    background-size: 250%;
+    color: #000;
+    background-position: 0;
+    transition: background-position .2s ease, color .2s ease;
+    background-image: linear-gradient(45deg, #fff 0%, #fff 55%, #000 55%, #000 100%);
+}
+
+#search-btn:hover{
+    background-position: 84%;
+    color: #fff;
+}
+
+#search-btn:focus{
+    outline: none;
+}
+
 .search h4 {
     margin-top: 0;
 }
