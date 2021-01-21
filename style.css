@@ -87,7 +87,7 @@ header h1 {
     display: flex;
 }
 
-.loader {
+#items-display div.loader {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -95,9 +95,10 @@ header h1 {
     display: none;
     flex-direction: row;
     align-items: center;
+    background-color: transparent;
 }
 
-.bar {
+#items-display div.bar {
     width: 10px;
     height: 5px;
     background: #10c15c;
@@ -105,15 +106,15 @@ header h1 {
     animation: bar 1s infinite linear;
 }
 
-.loader .bar:nth-child(1){
+#items-display div.loader div.bar:nth-child(1){
    animation-delay: 0s;
 }
 
-.loader .bar:nth-child(2) {
+#items-display div.loader div.bar:nth-child(2) {
      animation-delay: 0.25s;
  }
 
-.loader .bar:nth-child(3) {
+#items-display div.loader div.bar:nth-child(3) {
      animation-delay: 0.5s;
 }
 
