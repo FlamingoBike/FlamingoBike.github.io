@@ -1,6 +1,18 @@
 let allItems = [];
 let loaded = false;
 
+const id_dictionary = Object.freeze({
+    ATTACK_SPEED: {
+        SUPER_SLOW  : 'Super Slow Attack Speed',
+        VERY_SLOW   : 'Very Slow Attack Speed',
+        SLOW        : 'Slow Attack Speed',
+        NORMAL      : 'Normal Attack Speed',
+        FAST        : 'Fast Attack Speed',
+        VERY_FAST   : 'Very Fast Attack Speed',
+        SUPER_FAST  : 'Super Fast Attack Speed'
+    }
+});
+
 const searchField = document.getElementById("search");
 const searchBtn = document.getElementById("search-btn");
 const itemsDiv = document.getElementById("items-display");
@@ -8,12 +20,17 @@ const itemsDiv = document.getElementById("items-display");
 function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
     for (const item of itemsToDisplay) {
-        itemsDiv.insertAdjacentHTML("beforeend", 
-        `<div class="item">` +
+        let div_item = `<div class="item">` +
         `<h3>${item["name"]}</h3>` +
-        `<p>${item["addLore"]}<p>` +
-        `</div>`
-        );
+        `<p class="subtitle">Combat Level ${item["level"]}<p>`;
+
+        if (item.attackSpeed) {
+            div_item += `<p class="attack-speed">${id_dictionary.ATTACK_SPEED[item["attackSpeed"]]}</p>`
+        }
+
+
+        div_item += `</div>`;
+        itemsDiv.insertAdjacentHTML("beforeend", div_item);
     }
 }
 

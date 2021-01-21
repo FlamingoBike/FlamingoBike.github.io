@@ -72,6 +72,11 @@ header h1 {
     flex-wrap: wrap;
 }
 
+.fl-space-around {
+    justify-content: space-around;
+}
+
+/* Item info style */
 #items-display .item {
     margin: 10px;
     padding: 10px;
@@ -79,8 +84,25 @@ header h1 {
     width: 250px;
 
     background-color: #252525;
+    border-radius: 12px;
 
     text-align: center;
+}
+
+#items-display .item h3{
+    margin-bottom: 5px;
+}
+
+#items-display .item .subtitle {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#items-display .item .attack-speed {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    text-align: left;
 }
 
 #items-display.loading .loader{
