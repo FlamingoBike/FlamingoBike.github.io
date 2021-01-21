@@ -30,10 +30,33 @@ function update() {
     updateItemDisplay(applyFilters(searchField.value));
 }
 
+function convertIds() {
+    const idsToModify = ["bonusAirDamage", "bonusAirDefense", "bonusEarthDamage", "bonusEarthDefense", "bonusFireDamage", "bonusFireDefense", "bonusThunderDamage", "bonusThunderDefense", "bonusWaterDamage", "bonusWaterDefense", "damageBonus", "damageBonusRaw", "emeraldStealing", "exploding", "gatherSpeed", "gatherXpBonus", "healthBonus", "healthRegen", "healthRegenRaw", "jumpHeight", "lifeSteal", "lootBonus", "lootQuality", "manaRegen", "manaSteal", "poison", "rainbowSpellDamageRaw", "reflection", "soulPoints", "speed", "spellCostPct1", "spellCostPct2", "spellCostPct3", "spellCostPct4", "spellCostRaw1", "spellCostRaw2", "spellCostRaw3", "spellCostRaw4", "spellDamage", "spellDamageRaw", "sprint", "sprintRegen", "thorns", "xpBonus"];
+
+    for (const id of idsToModify) {
+        for (const item of allItems) {
+            if (item[id] !== 0) {
+                if (item[id] > 0) {
+                    item[id] = {min: Math.floor(item[id] * 0.3), max: Math.floor(item[id] * 1.3)};
+                    if (item[id]["min"] < 1) {
+                        item[id]["min"] = 1;
+                    }
+                } else {
+                    item[id] = {min: Math.floor(item[id] * 0.7), max: Math.floor(item[id] * 1.3)};
+                    if (item[id]["max"] > -1) {
+                        item[id]["max"] = -1;
+                    }
+                }
+            }
+        }
+    }
+}
+
 function finishedLoading() {
     loaded = true;
     isLoaded();
     updateItemDisplay(allItems);
+    //console.log(allItems.find((i) => {return i["name"] === "Divzer"}));
 }
 
 function requestItems() {
@@ -41,22 +64,16 @@ function requestItems() {
         url: "https://api.wynncraft.com/public_api.php?action=itemDB&category=all",
         success: (data) => {
             allItems = data["items"];
-            finishedLoading();
-        }
-    })
-    $.ajax({
-        url: "https://api.wynncraft.com/public_api.php?action=itemDB&category=all",
-        success: (data) => {
-            allItems = data["items"];
+            convertIds();
             finishedLoading();
         }
     });
     isLoaded();
 }
 
-function isLoaded(){
+function isLoaded() {
     let itemsDisplay = document.querySelector('#items-display');
-    if(loaded !== true){
+    if (loaded !== true) {
         itemsDisplay.classList.add('loading');
     } else {
         itemsDisplay.classList.remove('loading');
