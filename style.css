@@ -21,3 +21,7 @@ header h1 {
 .flex {
     display: flex;
 }
+
+.fl-column {
+    flex-direction: column;
+}
