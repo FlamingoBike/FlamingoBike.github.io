@@ -98,6 +98,21 @@ const uniqueFilter = document.getElementById("unique-filter");
 const setFilter = document.getElementById("set-filter");
 const normalFilter = document.getElementById("normal-filter");
 
+const wandFilter = document.getElementById("wand-filter");
+const bowFilter = document.getElementById("bow-filter");
+const daggerFilter = document.getElementById("dagger-filter");
+const spearFilter = document.getElementById("spear-filter");
+const relikFilter = document.getElementById("relik-filter");
+
+const ringFilter = document.getElementById("ring-filter");
+const braceletFilter = document.getElementById("bracelet-filter");
+const necklaceFilter = document.getElementById("necklace-filter");
+
+const helmetFilter = document.getElementById("helmet-filter");
+const chestplateFilter = document.getElementById("chestplate-filter");
+const leggingsFilter = document.getElementById("leggings-filter");
+const bootsFilter = document.getElementById("boots-filter");
+
 const sortTypeFilter = document.getElementById("sort-type-filter");
 const sortInvertFilter = document.getElementById("sort-invert-filter");
 
@@ -246,6 +261,78 @@ function applyFilters(searchStr) {
         else
             return true;
     })
+    .filter((i) => {
+        if (i["type"] === "Wand")
+            return wandFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["type"] === "Bow")
+            return bowFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["type"] === "Dagger")
+            return daggerFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["type"] === "Spear")
+            return spearFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["type"] === "Relik")
+            return relikFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["accessoryType"] === "Ring")
+            return ringFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["accessoryType"] === "Bracelet")
+            return braceletFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["accessoryType"] === "Necklace")
+            return necklaceFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["type"] === "Helmet")
+            return helmetFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["type"] === "Chestplate")
+            return chestplateFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["type"] === "Leggings")
+            return leggingsFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["type"] === "Boots")
+            return bootsFilter.checked;
+        else
+            return true;
+    })
     .sort((a, b) => {
         let toReturn = 0;
         if (sortType === "alphabetical") {
@@ -324,6 +411,12 @@ function isLoaded() {
         itemsDisplay.classList.add('loading');
     } else {
         itemsDisplay.classList.remove('loading');
+    }
+}
+
+function checkEnterUpdate(event) {
+    if (event.keyCode === 13) {
+        update();
     }
 }
 
