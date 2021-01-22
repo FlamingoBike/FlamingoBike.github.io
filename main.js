@@ -32,9 +32,43 @@ function updateItemDisplay(itemsToDisplay) {
         `<h3>${item["name"]}</h3>` +
         `<p class="subtitle">Combat Level ${item["level"]}<p>`;
 
-        if (item.attackSpeed) {
-            div_item += `<p class="attack-speed">${id_dictionary.ATTACK_SPEED[item["attackSpeed"]]}</p>`
+        switch (item.category) {
+            case 'weapon':
+                // Show item's attack speed
+                if (item.attackSpeed) {
+                    div_item += `<p class="attack-speed">${id_dictionary.ATTACK_SPEED[item["attackSpeed"]]}</p>`
+                }
+
+                // Create a div for weapon damages
+                div_item += '<div class="damage">';
+
+                // Weapon damage on hit
+                if (item.damage != '0-0') {
+                    div_item += `<p class="neutral-type"> Damage: ${item.damage}</p>`;
+                }
+                if (item.fireDamage != '0-0') {
+                    div_item += `<p class="fire-type group"> Damage: ${item.fireDamage}</p>`;
+                }
+                if (item.waterDamage != '0-0') {
+                    div_item += `<p class="water-type group"> Damage: ${item.waterDamage}</p>`;
+                }
+                if (item.airDamage != '0-0') {
+                    div_item += `<p class="air-type group"> Damage: ${item.airDamage}</p>`;
+                }
+                if (item.thunderDamage != '0-0') {
+                    div_item += `<p class="thunder-type group"> Damage: ${item.thunderDamage}</p>`;
+                }
+                if (item.earthDamage != '0-0') {
+                    div_item += `<p class="earth-type group"> Damage: ${item.earthDamage}</p>`;
+                }
+
+                // Close div
+                div_item += '</div>';
+
+            break;
         }
+
+
 
 
         div_item += `</div>`;
