@@ -111,6 +111,42 @@ header h1 {
     justify-content: space-around;
 }
 
+/* Stats icons */
+.neutral-type {
+    margin-bottom: 10px;
+    margin-top: 0;
+    color: #FFAA00;
+}
+
+.neutral-type::before {
+    content: '✤ Neutral';
+}
+
+.fire-type::before {
+    color: #FF5555;
+    content: '✹ Fire';
+}
+
+.water-type::before {
+    color: #55FFFF;
+    content: '❉ Water';
+}
+
+.air-type::before {
+    color: #FFFFFF;
+    content: '❋ Air';
+}
+
+.thunder-type::before {
+    color: #FFFF55;
+    content: '✦ Thunder';
+}
+
+.earth-type::before {
+    color: #00AA00;
+    content: '✤ Earth';
+}
+
 /* Item info style */
 #items-display .item {
     margin: 10px;
@@ -135,11 +171,22 @@ header h1 {
 
 #items-display .item .attack-speed {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 8px;
 
     text-align: left;
 }
 
+/* Weapon damage */
+#items-display .item .damage {
+    text-align: left;
+}
+
+#items-display .item .damage .group {
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+/* Loader */
 #items-display.loading .loader{
     display: flex;
 }
