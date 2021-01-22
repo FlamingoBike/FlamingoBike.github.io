@@ -115,6 +115,8 @@ header h1 {
     justify-content: space-between;
 }
 
+
+
 /* Stats icons */
 .neutral-type {
     margin-bottom: 10px;
@@ -151,6 +153,53 @@ header h1 {
     content: '✤ Earth';
 }
 
+.health {
+    color: #AA0000;
+}
+
+.health::before {
+    content: '\2764';
+}
+
+/* Text proprieties */
+.positive {
+    color: #16F016;
+}
+
+.negative {
+    color: #BB3030;
+}
+
+/* Tiers */
+.mythic {
+    color: rgb(170, 0, 170);
+}
+
+.fabled {
+    color: rgb(255, 85, 85);
+}
+
+.legendary {
+    color: rgb(85, 255, 255);
+}
+
+.rare {
+    color: rgb(255, 85, 255);
+}
+
+.unique {
+    color: rgb(255, 255, 85);
+}
+
+.set {
+    color: rgb(85, 255, 85);
+}
+
+.restrictions {
+    margin-bottom: 0;
+    text-align: right;
+}
+
 /* Item info style */
 #items-display .item {
     margin: 10px;
@@ -168,7 +217,7 @@ header h1 {
 
 /* Resize when mouse is over */
 #items-display .item:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 #items-display .item h3 {
@@ -202,6 +251,12 @@ header h1 {
 #items-display .item .side .group {
     margin-bottom: 2px;
     margin-top: 2px;
+}
+
+/* Item stat */
+.stat p {
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 /* Loader */

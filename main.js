@@ -1,6 +1,8 @@
 let allItems = [];
 let loaded = false;
 
+const idsToModify = ["bonusAirDamage", "bonusAirDefense", "bonusEarthDamage", "bonusEarthDefense", "bonusFireDamage", "bonusFireDefense", "bonusThunderDamage", "bonusThunderDefense", "bonusWaterDamage", "bonusWaterDefense", "damageBonus", "damageBonusRaw", "emeraldStealing", "exploding", "gatherSpeed", "gatherXpBonus", "healthBonus", "healthRegen", "healthRegenRaw", "jumpHeight", "lifeSteal", "lootBonus", "lootQuality", "manaRegen", "manaSteal", "poison", "rainbowSpellDamageRaw", "reflection", "soulPoints", "speed", "spellCostPct1", "spellCostPct2", "spellCostPct3", "spellCostPct4", "spellCostRaw1", "spellCostRaw2", "spellCostRaw3", "spellCostRaw4", "spellDamage", "spellDamageRaw", "sprint", "sprintRegen", "thorns", "xpBonus"];
+
 const id_dictionary = Object.freeze({
     ATTACK_SPEED: {
         SUPER_SLOW  : 'Super Slow Attack Speed',
@@ -18,6 +20,70 @@ const id_dictionary = Object.freeze({
         Dagger  :   'Assassin/Ninja',
         Spear   :   'Warrior/Knight',
     },
+    IDS: {
+        agilityPoints: "Agility",
+        defensePoints: "Defense",
+        dexterityPoints: "Dexterity",
+        intelligencePoints: "Intelligence",
+        strengthPoints: "Strength",
+        emeraldStealing: "Stealing",
+        exploding: "Exploding",
+        reflection: "Reflection",
+        soulPoints: "Soul Point Regen",
+        speed: "Walk Speed",
+        jumpHeight: "Jump Height",
+        lootBonus: "Loot Bonus",
+        lootQuality: "Loot Quality",
+        xpBonus: "Combat XP Bonus",
+        sprint: "Sprint Duration",
+        sprintRegen: "Sprint Regen",
+        thorns: "Thorns",
+        healthBonus: "Health Bonus",
+        healthRegen: "Health Regen %",
+        healthRegenRaw: "Health Regen Raw",
+        lifeSteal: "Life Steal",
+        manaRegen: "Mana Regen",
+        manaSteal: "Mana Steal",
+        attackSpeedBonus: "Attack Speed Bonus",
+        bonusAirDamage: "Air Damage %",
+        bonusAirDefense: "Air Defense %",
+        bonusEarthDamage: "Earth Damage %",
+        bonusEarthDefense: "Earth Defense %",
+        bonusFireDamage: "Fire Damage %",
+        bonusFireDefense: "Fire Defense %",
+        bonusThunderDamage: "Thunder Damage %",
+        bonusThunderDefense: "Thunder Defense %",
+        bonusWaterDamage: "Water Damage %",
+        bonusWaterDefense: "Water Defense %",
+        damageBonus: "Main Attack Damage %",
+        damageBonusRaw: "Main Attack Damage Raw",
+        spellDamageRaw: "Spell Damage Raw",
+        spellDamage: "Spell Damage %",
+        spellCostPct1: "1st Spell Cost %",
+        spellCostPct2: "2nd Spell Cost %",
+        spellCostPct3: "3rd Spell Cost %",
+        spellCostPct4: "4th Spell Cost %",
+        spellCostRaw1: "1st Spell Cost Raw",
+        spellCostRaw2: "2nd Spell Cost Raw",
+        spellCostRaw3: "3rd Spell Cost Raw",
+        spellCostRaw4: "4th Spell Cost Raw",
+        gatherSpeed: "Gathering Speed Bonus",
+        gatherXpBonus: "Gathering XP %"
+    },
+    DAMAGES: {
+        fireDamage      : 'fire-type',
+        waterDamage     : 'water-type',
+        airDamage       : 'air-type',
+        thunderDamage   : 'thunder-type',
+        earthDamage     : 'earth-type'
+    },
+    DEFENSES: {
+        fireDefense     : 'fire-type',
+        waterDefense    : 'water-type',
+        airDefense      : 'air-type',
+        thunderDefense  : 'thunder-type',
+        earthDefense    : 'earth-type'
+    }
 });
 
 const searchField = document.getElementById("search");
@@ -39,7 +105,7 @@ function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
     for (const item of itemsToDisplay) {
         let div_item = `<div class="item" onclick="debug('${item["name"]}')">` +
-        `<h3>${item["name"]}</h3>` +
+        `<h3 class="${item.tier.toLowerCase()}">${item["name"]}</h3>` +
         `<p class="subtitle">Combat Level ${item["level"]}<p>`;
 
         switch (item.category) {
@@ -49,69 +115,83 @@ function updateItemDisplay(itemsToDisplay) {
                     div_item += `<p class="attack-speed">${id_dictionary.ATTACK_SPEED[item["attackSpeed"]]}</p>`
                 }
 
-                // Create a div for weapon damages
+                // Add weapon's damage
                 div_item += '<div class="side">';
-
-                // Weapon damage on hit
-                if (item.damage != '0-0') {
-                    div_item += `<p class="neutral-type"> Damage: ${item.damage}</p>`;
+                for (const t in id_dictionary.DAMAGES) {
+                    if (item[t] != '0-0')
+                        div_item += `<p class="${id_dictionary.DAMAGES[t]} group"> Damage: ${item[t]}</p>`;
                 }
-                if (item.fireDamage != '0-0') {
-                    div_item += `<p class="fire-type group"> Damage: ${item.fireDamage}</p>`;
-                }
-                if (item.waterDamage != '0-0') {
-                    div_item += `<p class="water-type group"> Damage: ${item.waterDamage}</p>`;
-                }
-                if (item.airDamage != '0-0') {
-                    div_item += `<p class="air-type group"> Damage: ${item.airDamage}</p>`;
-                }
-                if (item.thunderDamage != '0-0') {
-                    div_item += `<p class="thunder-type group"> Damage: ${item.thunderDamage}</p>`;
-                }
-                if (item.earthDamage != '0-0') {
-                    div_item += `<p class="earth-type group"> Damage: ${item.earthDamage}</p>`;
-                }
-
-                div_item += '</div>';
-                div_item += '<div class="side">'
-                // Add Class requirement
-                div_item += `<p class="group">Class Req: ${id_dictionary.CLASSES[item.type]}</p>`;
-
-                // Add Stats requirement
-                if (item.strength > 0) {
-                    div_item += `<p class="group">Strength Min: ${item.strength}</p>`;
-                }
-                if (item.agility > 0) {
-                    div_item += `<p class="group">Agility Min: ${item.agility}</p>`;
-                }
-                if (item.defense > 0) {
-                    div_item += `<p class="group">Defense Min: ${item.defense}</p>`;
-                }
-                if (item.intelligence > 0) {
-                    div_item += `<p class="group">Intelligence Min: ${item.intelligence}</p>`;
-                }
-                if (item.dexterity > 0) {
-                    div_item += `<p class="group">Dexterity Min: ${item.dexterity}</p>`;
-                }
-                // Close stats div
                 div_item += '</div>';
 
-                // Weapon bonuses
-                div_item += '<div class="info flex fl-row fl-space-between">' +
-                '<p>Min</p><p>Name</p><p>Max</p>';
+                // Show class requirement for weapon
+                div_item += `<div class="side"><p class="group">Class Req: ${id_dictionary.CLASSES[item.type]}</p></div>`;
+            break;
+            case 'armor':
+                if (item.health)
+                    div_item += `<p class="health side"> Health: ${item.health}</p>`;
+
+                // Show armor's defenses
+                div_item += '<div class="side">';
+                for (const t in id_dictionary.DEFENSES) {
+                    if (item[t] != '0-0')
+                        div_item += `<p class="${id_dictionary.DEFENSES[t]} group"> Defense: ${item[t]}</p>`;
+                }
                 div_item += '</div>';
-
-
-
-                // Close div
-                div_item += '</div>';
-
             break;
         }
 
+        // Add Class requirement
+        div_item += '<div class="side">'
 
+        // Add Stats requirement
+        if (item.strength > 0) {
+            div_item += `<p class="group">Strength Min: ${item.strength}</p>`;
+        }
+        if (item.agility > 0) {
+            div_item += `<p class="group">Agility Min: ${item.agility}</p>`;
+        }
+        if (item.defense > 0) {
+            div_item += `<p class="group">Defense Min: ${item.defense}</p>`;
+        }
+        if (item.intelligence > 0) {
+            div_item += `<p class="group">Intelligence Min: ${item.intelligence}</p>`;
+        }
+        if (item.dexterity > 0) {
+            div_item += `<p class="group">Dexterity Min: ${item.dexterity}</p>`;
+        }
+        // Close stats div
+        div_item += '</div>';
 
+        // Weapon bonuses
+        div_item += '<div class="info flex fl-row fl-space-between">' +
+        '<p>Min</p><p>Name</p><p>Max</p>';
+        div_item += '</div>';
 
+        for (const id in id_dictionary.IDS) {
+            if (item[id] !== 0) {
+                div_item += `<div class="stat flex fl-row fl-space-between">`
+                switch (typeof(item[id])) {
+                    case 'object':
+                        if (item[id].min == item[id].max) {
+                            div_item += `<p class="info">~</p><p>${id_dictionary.IDS[id]}</p><p class="${(item[id].max > 0) ? 'positive' : 'negative'}">${item[id].max}</p>`;
+                        } else {
+                            div_item += `<p class="${(item[id].min > 0) ? 'positive' : 'negative'}">${item[id].min}</p><p>${id_dictionary.IDS[id]}</p><p class="${(item[id].max > 0) ? 'positive' : 'negative'}">${item[id].max}</p>`;
+                        }
+                        break;
+                    case 'number':
+                        div_item += `<p class="info">~</p><p>${id_dictionary.IDS[id]}</p>` +
+                        `<p class="${(item[id] > 0) ? 'positive' : 'negative'}">${item[id]}</p>`;
+                        break;
+                }
+                div_item += `</div>`
+            }
+        }
+
+        if (item.restrictions)
+            div_item += `<p class="restrictions info">${item.restrictions}</p>`;
+
+        // Close divs
+        div_item += '</div>';
         div_item += `</div>`;
         itemsDiv.insertAdjacentHTML("beforeend", div_item);
     }
@@ -200,8 +280,6 @@ function update() {
 }
 
 function convertIds() {
-    const idsToModify = ["bonusAirDamage", "bonusAirDefense", "bonusEarthDamage", "bonusEarthDefense", "bonusFireDamage", "bonusFireDefense", "bonusThunderDamage", "bonusThunderDefense", "bonusWaterDamage", "bonusWaterDefense", "damageBonus", "damageBonusRaw", "emeraldStealing", "exploding", "gatherSpeed", "gatherXpBonus", "healthBonus", "healthRegen", "healthRegenRaw", "jumpHeight", "lifeSteal", "lootBonus", "lootQuality", "manaRegen", "manaSteal", "poison", "rainbowSpellDamageRaw", "reflection", "soulPoints", "speed", "spellCostPct1", "spellCostPct2", "spellCostPct3", "spellCostPct4", "spellCostRaw1", "spellCostRaw2", "spellCostRaw3", "spellCostRaw4", "spellDamage", "spellDamageRaw", "sprint", "sprintRegen", "thorns", "xpBonus"];
-
     for (const id of idsToModify) {
         for (const item of allItems) {
             if (item[id] !== 0) {
