@@ -31,7 +31,7 @@ const sortInvertFilter = document.getElementById("sort-invert-filter");
 function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
     for (const item of itemsToDisplay) {
-        let div_item = `<div class="item">` +
+        let div_item = `<div class="item" onclick="debug('${item["name"]}')">` +
         `<h3>${item["name"]}</h3>` +
         `<p class="subtitle">Combat Level ${item["level"]}<p>`;
 
@@ -209,4 +209,8 @@ function isLoaded() {
     } else {
         itemsDisplay.classList.remove('loading');
     }
+}
+
+function debug(name) {
+    console.log(allItems.find((i) => {return i["name"] === name}));
 }
