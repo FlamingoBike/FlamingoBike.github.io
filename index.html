@@ -12,6 +12,13 @@
         <div class="search">
             <h4>Search:</h4>
             <input type="text" id="search" placeholder="Search for an item..." /><button onclick="update()" id="search-btn">Search</button>
+            <input type="checkbox" id="mythic-filter" onclick="update()" checked> Mythic Items
+            <input type="checkbox" id="fabled-filter" onclick="update()" checked> Fabled Items
+            <input type="checkbox" id="legendary-filter" onclick="update()" checked> Legendary Items
+            <input type="checkbox" id="rare-filter" onclick="update()" checked> Rare Items
+            <input type="checkbox" id="unique-filter" onclick="update()" checked> Unique Items
+            <input type="checkbox" id="set-filter" onclick="update()" checked> Set Items
+            <input type="checkbox" id="normal-filter" onclick="update()" checked> Normal Items
         </div>
         <div class="flex fl-row fl-wrap fl-space-around" id="items-display">
             <div class="loader">

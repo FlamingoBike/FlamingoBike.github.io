@@ -17,6 +17,14 @@ const searchField = document.getElementById("search");
 const searchBtn = document.getElementById("search-btn");
 const itemsDiv = document.getElementById("items-display");
 
+const mythicFilter = document.getElementById("mythic-filter");
+const fabledFilter = document.getElementById("fabled-filter");
+const legendaryFilter = document.getElementById("legendary-filter");
+const rareFilter = document.getElementById("rare-filter");
+const uniqueFilter = document.getElementById("unique-filter");
+const setFilter = document.getElementById("set-filter");
+const normalFilter = document.getElementById("normal-filter");
+
 function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
     for (const item of itemsToDisplay) {
@@ -35,17 +43,51 @@ function updateItemDisplay(itemsToDisplay) {
 }
 
 function applyFilters(searchStr) {
-    let filteredItems = allItems.filter((i) => {
+    return allItems
+    .filter((i) => {
         return i["name"].toLowerCase().includes(searchStr.toLowerCase());
-    });
-
-    filteredItems = filteredItems.sort((a, b) => {
+    })
+    .filter((i) => {
+        if (i["tier"] === "Mythic")
+            return mythicFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["tier"] === "Legendary")
+            return legendaryFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["tier"] === "Rare")
+            return rareFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["tier"] === "Unique")
+            return uniqueFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["tier"] === "Set")
+            return setFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["tier"] === "Normal")
+            return normalFilter.checked;
+        else
+            return true;
+    })
+    .sort((a, b) => {
         let toReturn = 0;
         (a["name"] < b["name"]) ? toReturn = -1 : toReturn = 1;
         return toReturn;
     });
-
-    return filteredItems;
 }
 
 function update() {
@@ -78,7 +120,7 @@ function finishedLoading() {
     loaded = true;
     isLoaded();
     updateItemDisplay(allItems);
-    console.log(allItems.find((i) => {return i["name"] === "Divzer"}));
+    console.log(allItems.find((i) => {return i["name"] === "Morph-Stardust"}));
 }
 
 function requestItems() {
