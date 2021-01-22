@@ -258,16 +258,16 @@ function applyFilters(searchStr) {
             
         } else {
             if (a[sortType] === 0) {
-                return -1;
-            } else if (b[sortType] === 0) {
                 return 1;
+            } else if (b[sortType] === 0) {
+                return -1;
             } else {
                 if (sortInvertFilter.checked) {
                     //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
-                    return a[sortType]["max"] - b[sortType]["max"];
+                    (a[sortType]["max"] > b[sortType]["max"]) ? toReturn = 1 : toReturn = -1;
                 } else {
                     //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
-                    return b[sortType]["max"] - a[sortType]["max"];
+                    (a[sortType]["max"] > b[sortType]["max"]) ? toReturn = -1 : toReturn = 1;
                 }
             }
         }
