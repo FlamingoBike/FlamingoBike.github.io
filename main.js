@@ -10,7 +10,14 @@ const id_dictionary = Object.freeze({
         FAST        : 'Fast Attack Speed',
         VERY_FAST   : 'Very Fast Attack Speed',
         SUPER_FAST  : 'Super Fast Attack Speed'
-    }
+    },
+    CLASSES: {
+        Wand    :   'Mage/Dark Wizard',
+        Relik   :   'Shaman/Skyseer',
+        Bow     :   'Archer/Hunter',
+        Dagger  :   'Assassin/Ninja',
+        Spear   :   'Warrior/Knight',
+    },
 });
 
 const searchField = document.getElementById("search");
@@ -43,7 +50,7 @@ function updateItemDisplay(itemsToDisplay) {
                 }
 
                 // Create a div for weapon damages
-                div_item += '<div class="damage">';
+                div_item += '<div class="side">';
 
                 // Weapon damage on hit
                 if (item.damage != '0-0') {
@@ -64,6 +71,37 @@ function updateItemDisplay(itemsToDisplay) {
                 if (item.earthDamage != '0-0') {
                     div_item += `<p class="earth-type group"> Damage: ${item.earthDamage}</p>`;
                 }
+
+                div_item += '</div>';
+                div_item += '<div class="side">'
+                // Add Class requirement
+                div_item += `<p class="group">Class Req: ${id_dictionary.CLASSES[item.type]}</p>`;
+
+                // Add Stats requirement
+                if (item.strength > 0) {
+                    div_item += `<p class="group">Strength Min: ${item.strength}</p>`;
+                }
+                if (item.agility > 0) {
+                    div_item += `<p class="group">Agility Min: ${item.agility}</p>`;
+                }
+                if (item.defense > 0) {
+                    div_item += `<p class="group">Defense Min: ${item.defense}</p>`;
+                }
+                if (item.intelligence > 0) {
+                    div_item += `<p class="group">Intelligence Min: ${item.intelligence}</p>`;
+                }
+                if (item.dexterity > 0) {
+                    div_item += `<p class="group">Dexterity Min: ${item.dexterity}</p>`;
+                }
+                // Close stats div
+                div_item += '</div>';
+
+                // Weapon bonuses
+                div_item += '<div class="info flex fl-row fl-space-between">' +
+                '<p>Min</p><p>Name</p><p>Max</p>';
+                div_item += '</div>';
+
+
 
                 // Close div
                 div_item += '</div>';
