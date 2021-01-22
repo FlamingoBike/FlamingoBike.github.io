@@ -25,6 +25,9 @@ const uniqueFilter = document.getElementById("unique-filter");
 const setFilter = document.getElementById("set-filter");
 const normalFilter = document.getElementById("normal-filter");
 
+const sortTypeFilter = document.getElementById("sort-type-filter");
+const sortInvertFilter = document.getElementById("sort-invert-filter");
+
 function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
     for (const item of itemsToDisplay) {
@@ -77,6 +80,8 @@ function updateItemDisplay(itemsToDisplay) {
 }
 
 function applyFilters(searchStr) {
+    console.log(`Invert: ${sortInvertFilter.checked} for ID: ${sortTypeFilter.value}`);
+    let sortType = sortTypeFilter.value;
     return allItems
     .filter((i) => {
         return i["name"].toLowerCase().includes(searchStr.toLowerCase());
@@ -84,6 +89,12 @@ function applyFilters(searchStr) {
     .filter((i) => {
         if (i["tier"] === "Mythic")
             return mythicFilter.checked;
+        else
+            return true;
+    })
+    .filter((i) => {
+        if (i["tier"] === "Fabled")
+            return fabledFilter.checked;
         else
             return true;
     })
@@ -119,7 +130,29 @@ function applyFilters(searchStr) {
     })
     .sort((a, b) => {
         let toReturn = 0;
-        (a["name"] < b["name"]) ? toReturn = -1 : toReturn = 1;
+        if (sortType === "alphabetical") {
+            
+            if (sortInvertFilter.checked) {
+                (a["name"] < b["name"]) ? toReturn = 1 : toReturn = -1;
+            } else {
+                (a["name"] < b["name"]) ? toReturn = -1 : toReturn = 1;
+            }
+            
+        } else {
+            if (a[sortType] === 0) {
+                return -1;
+            } else if (b[sortType] === 0) {
+                return 1;
+            } else {
+                if (sortInvertFilter.checked) {
+                    //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
+                    return a[sortType]["max"] - b[sortType]["max"];
+                } else {
+                    //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
+                    return b[sortType]["max"] - a[sortType]["max"];
+                }
+            }
+        }
         return toReturn;
     });
 }
@@ -153,7 +186,7 @@ function convertIds() {
 function finishedLoading() {
     loaded = true;
     isLoaded();
-    updateItemDisplay(allItems);
+    update();
     console.log(allItems.find((i) => {return i["name"] === "Morph-Stardust"}));
 }
 

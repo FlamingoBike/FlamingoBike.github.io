@@ -19,6 +19,13 @@
             <input type="checkbox" id="unique-filter" onclick="update()" checked> Unique Items
             <input type="checkbox" id="set-filter" onclick="update()" checked> Set Items
             <input type="checkbox" id="normal-filter" onclick="update()" checked> Normal Items
+            &nbsp;&nbsp;&nbsp;Sorting:
+            <select id="sort-type-filter" onchange="update()">
+                <option value="alphabetical" selected>Alphabetical</option>
+                <option value="spellDamageRaw">Spell Damage Raw</option>
+                <option value="spellDamage">Spell Damage %</option>
+            </select>
+            <input type="checkbox" id="sort-invert-filter" onclick="update()"> Invert
         </div>
         <div class="flex fl-row fl-wrap fl-space-around" id="items-display">
             <div class="loader">
