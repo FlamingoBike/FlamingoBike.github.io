@@ -116,9 +116,13 @@ const bootsFilter = document.getElementById("boots-filter");
 const sortTypeFilter = document.getElementById("sort-type-filter");
 const sortInvertFilter = document.getElementById("sort-invert-filter");
 
+const itemLimit = 200;
+
 function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
+    let limitCounter = 0;
     for (const item of itemsToDisplay) {
+        limitCounter++;
         let div_item = `<div class="item" onclick="debug('${item["name"]}')">` +
         `<h3 class="${item.tier.toLowerCase()}">${item["name"]}</h3>` +
         `<p class="subtitle">Combat Level ${item["level"]}<p>`;
@@ -177,7 +181,7 @@ function updateItemDisplay(itemsToDisplay) {
         // Close stats div
         div_item += '</div>';
 
-        // Weapon bonuses
+        // Item bonuses
         div_item += '<div class="info flex fl-row fl-space-between">' +
         '<p>Min</p><p>Name</p><p>Max</p>';
         div_item += '</div>';
@@ -209,11 +213,14 @@ function updateItemDisplay(itemsToDisplay) {
         div_item += '</div>';
         div_item += `</div>`;
         itemsDiv.insertAdjacentHTML("beforeend", div_item);
+
+        if (limitCounter >= itemLimit) {
+            break;
+        }
     }
 }
 
 function applyFilters(searchStr) {
-    console.log(`Invert: ${sortInvertFilter.checked} for ID: ${sortTypeFilter.value}`);
     let sortType = sortTypeFilter.value;
     return allItems
     .filter((i) => {
@@ -292,19 +299,22 @@ function applyFilters(searchStr) {
             return true;
     })
     .filter((i) => {
-        if (i["accessoryType"] === "Ring")
+        //if (i["accessoryType"] === "Ring")
+        if (i["type"] === "Ring")
             return ringFilter.checked;
         else
             return true;
     })
     .filter((i) => {
-        if (i["accessoryType"] === "Bracelet")
+        //if (i["accessoryType"] === "Bracelet")
+        if (i["type"] === "Bracelet")
             return braceletFilter.checked;
         else
             return true;
     })
     .filter((i) => {
-        if (i["accessoryType"] === "Necklace")
+        //if (i["accessoryType"] === "Necklace")
+        if (i["type"] === "Necklace")
             return necklaceFilter.checked;
         else
             return true;
@@ -369,18 +379,20 @@ function update() {
 function convertIds() {
     for (const id of idsToModify) {
         for (const item of allItems) {
-            if (item[id] !== 0) {
+            if (item[id] && item[id] !== 0) {
                 if (item[id] > 0) {
-                    item[id] = {min: Math.floor(item[id] * 0.3), max: Math.floor(item[id] * 1.3)};
+                    item[id] = {min: Math.round(item[id] * 0.3), max: Math.round(item[id] * 1.3)};
                     if (item[id]["min"] < 1) {
                         item[id]["min"] = 1;
                     }
                 } else {
-                    item[id] = {min: Math.floor(item[id] * 1.3), max: Math.floor(item[id] * 0.7)};
+                    item[id] = {min: Math.round(item[id] * 1.3), max: Math.round(item[id] * 0.7)};
                     if (item[id]["max"] > -1) {
                         item[id]["max"] = -1;
                     }
                 }
+            } else {
+                item[id] = 0;
             }
         }
     }
@@ -390,20 +402,65 @@ function finishedLoading() {
     loaded = true;
     isLoaded();
     update();
-    console.log(allItems.find((i) => {return i["name"] === "Morph-Stardust"}));
 }
 
 function requestItems() {
+    fetch("./formatteditems.json").then((data) => {
+        data.json().then((data) => {
+            allItems = data;
+            //convertIds();
+            //console.log(allItems);
+            finishedLoading()
+        })
+    })
+    isLoaded();
+}
+
+/*function requestItems() {
     $.ajax({
         url: "https://api.wynncraft.com/public_api.php?action=itemDB&category=all",
         success: (data) => {
-            allItems = data["items"];
-            convertIds();
-            finishedLoading();
+            //allItems = data["items"];
+            //convertIds();
+            //finishedLoading();
+            //let apiItems = data["items"];
+
+            fetch("./test.json").then((data) => {
+                data.json().then((hppengItems) => {
+                    fetch("./itemdata.json").then((data) => {
+                        data.json().then((newItems) => {
+                            //console.log(data);
+                            //allItems = data;
+                            for (const item of hppengItems) {
+                                if (item["name"].includes("(1.20)")) {
+                                    //let targetItemPos = apiItems.indexOf(apiItems.find((i) => { return i["name"] === item["name"].substr(0, item["name"].length - 7)}));
+                                    //if (apiItems[targetItemPos] !== undefined) {
+                                        //for (const key in item) {
+                                            //apiItems[targetItemPos][key] = item[key];
+                                        //}
+                                    //} else {
+                                        //apiItems.push(item);
+                                    //}
+                                    let found = newItems.find((i) => {return i["name"] === item["name"]})
+                                    if (!found) {
+                                        console.log(item["name"]);
+                                    }
+                                }
+                            }
+                            //console.log(apiItems);
+                            //allItems = apiItems;
+                            //convertIds();
+                            //finishedLoading()
+                        })
+                    })
+                })
+            })
+
         }
     });
+    //isLoaded();
     isLoaded();
-}
+}*/
 
 function isLoaded() {
     let itemsDisplay = document.querySelector('#items-display');
