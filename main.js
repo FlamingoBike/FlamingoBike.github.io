@@ -113,18 +113,20 @@ const chestplateFilter = document.getElementById("chestplate-filter");
 const leggingsFilter = document.getElementById("leggings-filter");
 const bootsFilter = document.getElementById("boots-filter");
 
-const checkboxFilters = [mythicFilter, fabledFilter, legendaryFilter, rareFilter, uniqueFilter, setFilter, normalFilter, wandFilter, bowFilter, daggerFilter, spearFilter, relikFilter, ringFilter, braceletFilter, necklaceFilter, helmetFilter, chestplateFilter, leggingsFilter, bootsFilter];
-
 const sortTypeFilter = document.getElementById("sort-type-filter");
 const sortInvertFilter = document.getElementById("sort-invert-filter");
+
+const checkboxFilters = [sortInvertFilter, mythicFilter, fabledFilter, legendaryFilter, rareFilter, uniqueFilter, setFilter, normalFilter, wandFilter, bowFilter, daggerFilter, spearFilter, relikFilter, ringFilter, braceletFilter, necklaceFilter, helmetFilter, chestplateFilter, leggingsFilter, bootsFilter];
 
 const itemLimit = 200;
 
 // Event Listeners on Checkboxes
 for (const checkbox of checkboxFilters) {
-    checkbox.addEventListener("mousedown", (event) => {
-        uncheckAll(event);
-    });
+    if (checkbox["id"] !== "sort-invert-filter") {
+        checkbox.addEventListener("mousedown", (event) => {
+            uncheckAll(event);
+        });
+    }
     checkbox.addEventListener("change", (event) => {
         update();
     });
@@ -135,7 +137,7 @@ function updateItemDisplay(itemsToDisplay) {
     let limitCounter = 0;
     for (const item of itemsToDisplay) {
         limitCounter++;
-        let div_item = `<div class="item" onclick="debug(${item["name"]})">` +
+        let div_item = `<div class="item" onclick="debug('${item["name"]}')">` +
         `<h3 class="${item.tier.toLowerCase()}">${item["name"]}</h3>`
 
         if (item.type)
@@ -552,6 +554,14 @@ function checkEnterUpdate(event) {
     if (event.keyCode === 13) {
         update();
     }
+}
+
+function resetFields() {
+    for (const chkbox of checkboxFilters) {
+        chkbox.checked = true;
+    }
+    searchField.value = "";
+    update();
 }
 
 function debug(name) {
