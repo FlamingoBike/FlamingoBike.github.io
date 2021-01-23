@@ -353,6 +353,20 @@ function applyFilters(searchStr) {
         else
             return true;
     })
+    .filter((i) => {
+        switch (sortType) {
+            case "alphabetical":
+            case "level": {
+                return true;
+            }
+            default: {
+                if (i[sortType])
+                    return true;
+                else
+                    return false;
+            }
+        }
+    })
     .sort((a, b) => {
         let toReturn = 0;
         switch (sortType) {
