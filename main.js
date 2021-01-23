@@ -123,7 +123,7 @@ function updateItemDisplay(itemsToDisplay) {
     let limitCounter = 0;
     for (const item of itemsToDisplay) {
         limitCounter++;
-        let div_item = `<div class="item" onclick="debug('${item["name"]}')">` +
+        let div_item = `<div class="item" onclick="debug(${item["name"]})">` +
         `<h3 class="${item.tier.toLowerCase()}">${item["name"]}</h3>`
 
         if (item.type)
@@ -305,22 +305,19 @@ function applyFilters(searchStr) {
             return true;
     })
     .filter((i) => {
-        //if (i["accessoryType"] === "Ring")
-        if (i["type"] === "Ring")
+        if (i["type"] === "Ring" || i["accessoryType"] === "Ring")
             return ringFilter.checked;
         else
             return true;
     })
     .filter((i) => {
-        //if (i["accessoryType"] === "Bracelet")
-        if (i["type"] === "Bracelet")
+        if (i["type"] === "Bracelet" || i["accessoryType"] === "Bracelet")
             return braceletFilter.checked;
         else
             return true;
     })
     .filter((i) => {
-        //if (i["accessoryType"] === "Necklace")
-        if (i["type"] === "Necklace")
+        if (i["type"] === "Necklace" || i["accessoryType"] === "Necklace")
             return necklaceFilter.checked;
         else
             return true;
