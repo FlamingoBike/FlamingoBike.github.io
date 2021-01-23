@@ -380,15 +380,17 @@ function convertIds() {
     for (const id of idsToModify) {
         for (const item of allItems) {
             if (item[id] && item[id] !== 0) {
-                if (item[id] > 0) {
-                    item[id] = {min: Math.round(item[id] * 0.3), max: Math.round(item[id] * 1.3)};
-                    if (item[id]["min"] < 1) {
-                        item[id]["min"] = 1;
-                    }
-                } else {
-                    item[id] = {min: Math.round(item[id] * 1.3), max: Math.round(item[id] * 0.7)};
-                    if (item[id]["max"] > -1) {
-                        item[id]["max"] = -1;
+                if ((item[id]["identified"] && item[id]["identified"] === false) || (item[id]["fixID"] && item[id]["fixID"] === false)) {
+                    if (item[id] > 0) {
+                        item[id] = {min: Math.round(item[id] * 0.3), max: Math.round(item[id] * 1.3)};
+                        if (item[id]["min"] < 1) {
+                            item[id]["min"] = 1;
+                        }
+                    } else {
+                        item[id] = {min: Math.round(item[id] * 1.3), max: Math.round(item[id] * 0.7)};
+                        if (item[id]["max"] > -1) {
+                            item[id]["max"] = -1;
+                        }
                     }
                 }
             } else {
