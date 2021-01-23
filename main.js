@@ -137,7 +137,7 @@ function updateItemDisplay(itemsToDisplay) {
                 // Add weapon's damage
                 div_item += '<div class="side">';
                 for (const t in id_dictionary.DAMAGES) {
-                    if (item[t] != '0-0')
+                    if (item[t] != '0-0' && item[t] != 0)
                         div_item += `<p class="${id_dictionary.DAMAGES[t]} group"> Damage: ${item[t]}</p>`;
                 }
                 div_item += '</div>';
@@ -152,7 +152,7 @@ function updateItemDisplay(itemsToDisplay) {
                 // Show armor's defenses
                 div_item += '<div class="side">';
                 for (const t in id_dictionary.DEFENSES) {
-                    if (item[t] != '0-0')
+                    if (item[t] != '0-0' && item[t] != 0)
                         div_item += `<p class="${id_dictionary.DEFENSES[t]} group"> Defense: ${item[t]}</p>`;
                 }
                 div_item += '</div>';
