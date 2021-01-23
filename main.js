@@ -401,7 +401,7 @@ function convertIds() {
     for (const id of idsToModify) {
         for (const item of allItems) {
             if (item[id] && item[id] !== 0) {
-                if (item["identified"] === false) {
+                if (item["identified"] === false || item["identified"] === undefined) {
                     if (item[id] > 0) {
                         item[id] = {min: Math.round(item[id] * 0.3), max: Math.round(item[id] * 1.3)};
                         if (item[id]["min"] < 1) {
