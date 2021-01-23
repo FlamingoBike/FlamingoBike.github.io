@@ -124,8 +124,14 @@ function updateItemDisplay(itemsToDisplay) {
     for (const item of itemsToDisplay) {
         limitCounter++;
         let div_item = `<div class="item" onclick="debug('${item["name"]}')">` +
-        `<h3 class="${item.tier.toLowerCase()}">${item["name"]}</h3>` +
-        `<p class="subtitle">Combat Level ${item["level"]}<p>`;
+        `<h3 class="${item.tier.toLowerCase()}">${item["name"]}</h3>`
+
+        if (item.type)
+            div_item += `<div><img class="itemicon" src="icons/${item.type.toLowerCase()}.png"></div>`
+        else
+            div_item += `<div><img class="itemicon" src="icons/${item.accessoryType.toLowerCase()}.png"></div>`
+
+        div_item += `<p class="subtitle">Combat Level ${item["level"]}<p>`;
 
         switch (item.category) {
             case 'weapon':
@@ -384,7 +390,7 @@ function convertIds() {
     for (const id of idsToModify) {
         for (const item of allItems) {
             if (item[id] && item[id] !== 0) {
-                if ((item[id]["identified"] && item[id]["identified"] === false) || (item[id]["fixID"] && item[id]["fixID"] === false)) {
+                if (item["identified"] === false) {
                     if (item[id] > 0) {
                         item[id] = {min: Math.round(item[id] * 0.3), max: Math.round(item[id] * 1.3)};
                         if (item[id]["min"] < 1) {

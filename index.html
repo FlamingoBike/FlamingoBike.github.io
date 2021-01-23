@@ -8,7 +8,6 @@
     <body onload="requestItems()"> <!-- onload="requestItems()" -->
         <header>
             <h1>Wynncraft Items</h1>
-        </header>
         <div class="search">
             <input type="text" id="search" onkeydown="checkEnterUpdate(event)" placeholder="Search for an item..." /><button onclick="update()" id="search-btn">Search</button>
             <input type="checkbox" id="mythic-filter" onclick="update()" checked> Mythic Items
@@ -90,6 +89,7 @@
             </select>
             <input type="checkbox" id="sort-invert-filter" onclick="update()"> Invert
         </div>
+        </header>
         <div class="flex fl-row fl-wrap fl-space-around" id="items-display">
             <div class="loader">
                 <div class="bar"></div>
