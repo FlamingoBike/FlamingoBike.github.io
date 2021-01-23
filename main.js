@@ -351,31 +351,42 @@ function applyFilters(searchStr) {
     })
     .sort((a, b) => {
         let toReturn = 0;
-        if (sortType === "alphabetical") {
-            
-            if (sortInvertFilter.checked) {
-                (a["name"] < b["name"]) ? toReturn = 1 : toReturn = -1;
-            } else {
-                (a["name"] < b["name"]) ? toReturn = -1 : toReturn = 1;
-            }
-            
-        } else {
-            if (a[sortType] === 0) {
-                return 1;
-            } else if (b[sortType] === 0) {
-                return -1;
-            } else {
-                let statA = (typeof(a[sortType]) === "object") ? a[sortType]["max"] : a[sortType];
-                let statB = (typeof(b[sortType]) === "object") ? b[sortType]["max"] : b[sortType];
+        switch (sortType) {
+            case "alphabetical": {
                 if (sortInvertFilter.checked) {
-                    //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
-                    //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = 1 : toReturn = -1;
-                    (statA > statB) ? toReturn = 1 : toReturn = -1;
+                    (a["name"] < b["name"]) ? toReturn = -1 : toReturn = 1;
                 } else {
-                    //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
-                    //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = -1 : toReturn = 1;
-                    (statA > statB) ? toReturn = -1 : toReturn = 1;
+                    (a["name"] < b["name"]) ? toReturn = 1 : toReturn = -1;
                 }
+                break;
+            }
+            case "level": {
+                if (sortInvertFilter.checked) {
+                    (a["level"] < b["level"]) ? toReturn = 1 : toReturn = -1;
+                } else {
+                    (a["level"] < b["level"]) ? toReturn = -1 : toReturn = 1;
+                }
+                break;
+            }
+            default: {
+                if (a[sortType] === 0) {
+                    return 1;
+                } else if (b[sortType] === 0) {
+                    return -1;
+                } else {
+                    let statA = (typeof (a[sortType]) === "object") ? a[sortType]["max"] : a[sortType];
+                    let statB = (typeof (b[sortType]) === "object") ? b[sortType]["max"] : b[sortType];
+                    if (sortInvertFilter.checked) {
+                        //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
+                        //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = 1 : toReturn = -1;
+                        (statA > statB) ? toReturn = -1 : toReturn = 1;
+                    } else {
+                        //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
+                        //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = -1 : toReturn = 1;
+                        (statA > statB) ? toReturn = 1 : toReturn = -1;
+                    }
+                }
+                break;
             }
         }
         return toReturn;

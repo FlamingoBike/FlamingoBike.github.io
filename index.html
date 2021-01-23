@@ -32,6 +32,7 @@
             &nbsp;&nbsp;&nbsp;Sorting:
             <select id="sort-type-filter" onchange="update()">
                 <option value="alphabetical" selected>Alphabetical</option>
+                <option value="level">Level</option>
                 <option value="agility">Agility Requirement</option>
                 <option value="agilityPoints">Agility Bonus</option>
                 <option value="defense">Defense Requirement</option>
@@ -87,7 +88,7 @@
                 <option value="gatherSpeed">Gathering Speed %</option>
                 <option value="gatherXpBonus">Gathering XP %</option>
             </select>
-            <input type="checkbox" id="sort-invert-filter" onclick="update()"> Invert
+            <input type="checkbox" id="sort-invert-filter" onclick="update()" checked> Invert
         </div>
         </header>
         <div class="flex fl-row fl-wrap fl-space-around" id="items-display">
