@@ -37,6 +37,9 @@ header {
 
     background-color: #252525;
     padding: 10px;
+
+    /*box-shadow: 0, 15px, 5px, 50px #000000;*/
+    box-shadow: 0 0 10px 5px #000000;
 }
 
 header h1 {
@@ -222,6 +225,7 @@ header h1 {
 /* Resize when mouse is over */
 #items-display .item:hover {
     transform: scale(1.1);
+    box-shadow: 0 0 15px 10px #000000;
 }
 
 #items-display .item h3 {
