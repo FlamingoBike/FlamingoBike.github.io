@@ -113,17 +113,22 @@ const chestplateFilter = document.getElementById("chestplate-filter");
 const leggingsFilter = document.getElementById("leggings-filter");
 const bootsFilter = document.getElementById("boots-filter");
 
+const checkboxFilters = [mythicFilter, fabledFilter, legendaryFilter, rareFilter, uniqueFilter, setFilter, normalFilter, wandFilter, bowFilter, daggerFilter, spearFilter, relikFilter, ringFilter, braceletFilter, necklaceFilter, helmetFilter, chestplateFilter, leggingsFilter, bootsFilter];
+
 const sortTypeFilter = document.getElementById("sort-type-filter");
 const sortInvertFilter = document.getElementById("sort-invert-filter");
 
 const itemLimit = 200;
 
 // Event Listeners on Checkboxes
-mythicFilter.addEventListener("mousedown", (event) => {
-    console.log(event);
-    uncheckAll(event);
-    update();
-});
+for (const checkbox of checkboxFilters) {
+    checkbox.addEventListener("mousedown", (event) => {
+        uncheckAll(event);
+    });
+    checkbox.addEventListener("change", (event) => {
+        update();
+    });
+}
 
 function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
@@ -429,12 +434,16 @@ function uncheckAll(event) {
                 uncheckType = "rarity";
                 break;
         }
+
         for (const chkbox of filterlists[uncheckType]) {
             if (chkbox["id"] !== event["target"]["id"]) {
                 chkbox.checked = false;
-                console.log(`unchecked ${chkbox["id"]}`)
+            } else {
+                chkbox.checked = true;
             }
         }
+
+        update();
     }
 }
 
@@ -478,7 +487,7 @@ function requestItems() {
             allItems = data;
             //convertIds();
             //console.log(allItems);
-            finishedLoading()
+            finishedLoading();
         })
     })
     isLoaded();
