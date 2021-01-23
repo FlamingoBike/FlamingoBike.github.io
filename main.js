@@ -118,6 +118,13 @@ const sortInvertFilter = document.getElementById("sort-invert-filter");
 
 const itemLimit = 200;
 
+// Event Listeners on Checkboxes
+mythicFilter.addEventListener("mousedown", (event) => {
+    console.log(event);
+    uncheckAll(event);
+    update();
+});
+
 function updateItemDisplay(itemsToDisplay) {
     itemsDiv.innerHTML = "";
     let limitCounter = 0;
@@ -388,6 +395,33 @@ function applyFilters(searchStr) {
         }
         return toReturn;
     });
+}
+
+function uncheckAll(event) {
+    if (event && event["button"] === 2) {
+        let uncheckType = "equip";
+        let filterlists = {
+            "rarity": [mythicFilter, fabledFilter, legendaryFilter, rareFilter, uniqueFilter, setFilter, normalFilter],
+            "equip": [wandFilter, bowFilter, daggerFilter, spearFilter, relikFilter, ringFilter, braceletFilter, necklaceFilter, helmetFilter, chestplateFilter, leggingsFilter, bootsFilter]
+        }
+        switch (event["target"]["id"]) {
+            case "mythic-filter":
+            case "fabled-filter":
+            case "legendary-filter":
+            case "rare-filter":
+            case "unique-filter":
+            case "set-filter":
+            case "normal-filter":
+                uncheckType = "rarity";
+                break;
+        }
+        for (const chkbox of filterlists[uncheckType]) {
+            if (chkbox["id"] !== event["target"]["id"]) {
+                chkbox.checked = false;
+                console.log(`unchecked ${chkbox["id"]}`)
+            }
+        }
+    }
 }
 
 function update() {

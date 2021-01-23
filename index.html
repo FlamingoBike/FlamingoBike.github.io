@@ -10,25 +10,25 @@
             <h1>Wynncraft Items</h1>
         <div class="search">
             <input type="text" id="search" onkeydown="checkEnterUpdate(event)" placeholder="Search for an item..." /><button onclick="update()" id="search-btn">Search</button>
-            <input type="checkbox" id="mythic-filter" onclick="update()" checked> Mythic Items
-            <input type="checkbox" id="fabled-filter" onclick="update()" checked> Fabled Items
-            <input type="checkbox" id="legendary-filter" onclick="update()" checked> Legendary Items
-            <input type="checkbox" id="rare-filter" onclick="update()" checked> Rare Items
-            <input type="checkbox" id="unique-filter" onclick="update()" checked> Unique Items
-            <input type="checkbox" id="set-filter" onclick="update()" checked> Set Items
-            <input type="checkbox" id="normal-filter" onclick="update()" checked> Normal Items
-            <input type="checkbox" id="wand-filter" onclick="update()" checked> Wands
-            <input type="checkbox" id="bow-filter" onclick="update()" checked> Bows
-            <input type="checkbox" id="dagger-filter" onclick="update()" checked> Daggers
-            <input type="checkbox" id="spear-filter" onclick="update()" checked> Spears
-            <input type="checkbox" id="relik-filter" onclick="update()" checked> Reliks
-            <input type="checkbox" id="ring-filter" onclick="update()" checked> Rings
-            <input type="checkbox" id="bracelet-filter" onclick="update()" checked> Bracelet
-            <input type="checkbox" id="necklace-filter" onclick="update()" checked> Necklace
-            <input type="checkbox" id="helmet-filter" onclick="update()" checked> Helmets
-            <input type="checkbox" id="chestplate-filter" onclick="update()" checked> Chestplates
-            <input type="checkbox" id="leggings-filter" onclick="update()" checked> Leggings
-            <input type="checkbox" id="boots-filter" onclick="update()" checked> Boots
+            <input type="checkbox" id="mythic-filter" oncontextmenu="return false;" checked> Mythic Items
+            <input type="checkbox" id="fabled-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Fabled Items
+            <input type="checkbox" id="legendary-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Legendary Items
+            <input type="checkbox" id="rare-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Rare Items
+            <input type="checkbox" id="unique-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Unique Items
+            <input type="checkbox" id="set-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Set Items
+            <input type="checkbox" id="normal-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Normal Items
+            <input type="checkbox" id="wand-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Wands
+            <input type="checkbox" id="bow-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Bows
+            <input type="checkbox" id="dagger-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Daggers
+            <input type="checkbox" id="spear-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Spears
+            <input type="checkbox" id="relik-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Reliks
+            <input type="checkbox" id="ring-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Rings
+            <input type="checkbox" id="bracelet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Bracelet
+            <input type="checkbox" id="necklace-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Necklace
+            <input type="checkbox" id="helmet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Helmets
+            <input type="checkbox" id="chestplate-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Chestplates
+            <input type="checkbox" id="leggings-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Leggings
+            <input type="checkbox" id="boots-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Boots
             &nbsp;&nbsp;&nbsp;Sorting:
             <select id="sort-type-filter" onchange="update()">
                 <option value="alphabetical" selected>Alphabetical</option>
