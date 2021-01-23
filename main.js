@@ -359,12 +359,16 @@ function applyFilters(searchStr) {
             } else if (b[sortType] === 0) {
                 return -1;
             } else {
+                let statA = (typeof(a[sortType]) === "object") ? a[sortType]["max"] : a[sortType];
+                let statB = (typeof(b[sortType]) === "object") ? b[sortType]["max"] : b[sortType];
                 if (sortInvertFilter.checked) {
                     //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
-                    (a[sortType]["max"] > b[sortType]["max"]) ? toReturn = 1 : toReturn = -1;
+                    //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = 1 : toReturn = -1;
+                    (statA > statB) ? toReturn = 1 : toReturn = -1;
                 } else {
                     //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
-                    (a[sortType]["max"] > b[sortType]["max"]) ? toReturn = -1 : toReturn = 1;
+                    //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = -1 : toReturn = 1;
+                    (statA > statB) ? toReturn = -1 : toReturn = 1;
                 }
             }
         }
