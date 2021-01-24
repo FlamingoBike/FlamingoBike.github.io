@@ -38,6 +38,7 @@ const id_dictionary = Object.freeze({
         sprint: "Sprint Duration",
         sprintRegen: "Sprint Regen",
         thorns: "Thorns",
+        poison: "Poison",
         healthBonus: "Health Bonus",
         healthRegen: "Health Regen %",
         healthRegenRaw: "Health Regen Raw",
