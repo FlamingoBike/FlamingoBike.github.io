@@ -379,6 +379,9 @@ function applyFilters(searchStr) {
             case "level": {
                 return true;
             }
+            case "pointsSum": {
+                return (i["agilityPoints"] !== 0 || i["dexterityPoints"] !== 0 || i["strengthPoints"] !== 0 || i["defensePoints"] !== 0 || i["intelligencePoints"] !== 0);
+            }
             default: {
                 if (i[sortType])
                     return true;
@@ -403,6 +406,16 @@ function applyFilters(searchStr) {
                     (a["level"] < b["level"]) ? toReturn = 1 : toReturn = -1;
                 } else {
                     (a["level"] < b["level"]) ? toReturn = -1 : toReturn = 1;
+                }
+                break;
+            }
+            case "pointsSum": {
+                let aSum = a["agilityPoints"] + a["dexterityPoints"] + a["strengthPoints"] + a["defensePoints"] + a["intelligencePoints"];
+                let bSum = b["agilityPoints"] + b["dexterityPoints"] + b["strengthPoints"] + b["defensePoints"] + b["intelligencePoints"];
+                if (sortInvertFilter.checked) {
+                    (aSum < bSum) ? toReturn = 1 : toReturn = -1;
+                } else {
+                    (aSum < bSum) ? toReturn = -1 : toReturn = 1;
                 }
                 break;
             }
