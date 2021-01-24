@@ -207,6 +207,10 @@ header h1 {
     height: 48px;
 }
 
+.select2-results__option {
+    color: #101010;
+}
+
 /* Item info style */
 #items-display .item {
     margin: 10px;

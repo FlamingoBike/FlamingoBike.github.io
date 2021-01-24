@@ -212,14 +212,26 @@ function updateItemDisplay(itemsToDisplay) {
                 switch (typeof(item[id])) {
                     case 'object':
                         if (item[id].min == item[id].max) {
-                            div_item += `<p class="info">~</p><p>${id_dictionary.IDS[id]}</p><p class="${(item[id].max > 0) ? 'positive' : 'negative'}">${item[id].max}</p>`;
+                            if (id.substr(0, id.length - 4) === "spellCost") {
+                                div_item += `<p class="info">~</p><p>${id_dictionary.IDS[id]}</p><p class="${(item[id].max < 0) ? 'positive' : 'negative'}">${item[id].max}</p>`;
+                            } else {
+                                div_item += `<p class="info">~</p><p>${id_dictionary.IDS[id]}</p><p class="${(item[id].max > 0) ? 'positive' : 'negative'}">${item[id].max}</p>`;
+                            }
                         } else {
-                            div_item += `<p class="${(item[id].min > 0) ? 'positive' : 'negative'}">${item[id].min}</p><p>${id_dictionary.IDS[id]}</p><p class="${(item[id].max > 0) ? 'positive' : 'negative'}">${item[id].max}</p>`;
+                            if (id.substr(0, id.length - 4) === "spellCost") {
+                                div_item += `<p class="${(item[id].min < 0) ? 'positive' : 'negative'}">${item[id].min}</p><p>${id_dictionary.IDS[id]}</p><p class="${(item[id].max < 0) ? 'positive' : 'negative'}">${item[id].max}</p>`;
+                            } else {
+                                div_item += `<p class="${(item[id].min > 0) ? 'positive' : 'negative'}">${item[id].min}</p><p>${id_dictionary.IDS[id]}</p><p class="${(item[id].max > 0) ? 'positive' : 'negative'}">${item[id].max}</p>`;
+                            }
                         }
                         break;
                     case 'number':
-                        div_item += `<p class="info">~</p><p>${id_dictionary.IDS[id]}</p>` +
-                        `<p class="${(item[id] > 0) ? 'positive' : 'negative'}">${item[id]}</p>`;
+                        div_item += `<p class="info">~</p><p>${id_dictionary.IDS[id]}</p>`;
+                        if (id.substr(0, id.length - 4) === "spellCost") {
+                            div_item += `<p class="${(item[id] < 0) ? 'positive' : 'negative'}">${item[id]}</p>`;
+                        } else {
+                            div_item += `<p class="${(item[id] > 0) ? 'positive' : 'negative'}">${item[id]}</p>`;
+                        }
                         break;
                 }
                 div_item += `</div>`
@@ -404,11 +416,19 @@ function applyFilters(searchStr) {
                     if (sortInvertFilter.checked) {
                         //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
                         //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = 1 : toReturn = -1;
-                        (statA > statB) ? toReturn = -1 : toReturn = 1;
+                        if (sortType.substr(0, sortType.length - 4) === "spellCost") {
+                            (statA < statB) ? toReturn = -1 : toReturn = 1;
+                        } else {
+                            (statA > statB) ? toReturn = -1 : toReturn = 1;
+                        }
                     } else {
                         //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
                         //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = -1 : toReturn = 1;
-                        (statA > statB) ? toReturn = 1 : toReturn = -1;
+                        if (sortType.substr(0, sortType.length - 4) === "spellCost") {
+                            (statA < statB) ? toReturn = 1 : toReturn = -1;
+                        } else {
+                            (statA > statB) ? toReturn = 1 : toReturn = -1;
+                        }
                     }
                 }
                 break;
@@ -494,6 +514,10 @@ function requestItems() {
     })
     isLoaded();
 }
+
+$(document).ready(function () {
+    $('#sort-type-filter').select2();
+});
 
 /*function requestItems() {
     $.ajax({
