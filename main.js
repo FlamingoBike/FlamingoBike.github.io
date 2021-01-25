@@ -239,6 +239,117 @@ function updateItemDisplay(itemsToDisplay) {
             }
         }
 
+        // Major ID
+        if (item.majorIds) {
+            switch (item.majorIds[0]) {
+                case "HAWKEYE": {
+                    div_item += `<p class="majorid-title">Hawkeye:</p>`;
+                    div_item += `<p class="majorid-desc">Arrow storm fires 5 arrows, each dealing 120% damage.</p>`;
+                    break;
+                }
+                case "SORCERY": {
+                    div_item += `<p class="majorid-title">Sorcery:</p>`;
+                    div_item += `<p class="majorid-desc">30% chance for spells and attacks to cast a second time at no additional cost.</p>`;
+                    break;
+                }
+                case "ARCANES": {
+                    div_item += `<p class="majorid-title">Transcendence:</p>`;
+                    div_item += `<p class="majorid-desc">50% chance for spells to cost no mana when casted.</p>`;
+                    break;
+                }
+                case "TAUNT": {
+                    div_item += `<p class="majorid-title">Taunt:</p>`;
+                    div_item += `<p class="majorid-desc">Mobs within 12 blocks target you upon casting War Scream.</p>`;
+                    break;
+                }
+                case "ROVINGASSASSIN": {
+                    div_item += `<p class="majorid-title">Roving Assassin:</p>`;
+                    div_item += `<p class="majorid-desc">Vanish no longer drains mana while invisible.</p>`;
+                    break;
+                }
+                case "PLAGUE": {
+                    div_item += `<p class="majorid-title">Plague:</p>`;
+                    div_item += `<p class="majorid-desc">Poisoned mobs spread 70% of their poison to nearby mobs.</p>`;
+                    break;
+                }
+                case "MAGNET": {
+                    div_item += `<p class="majorid-title">Magnet:</p>`;
+                    div_item += `<p class="majorid-desc">Pulls items within an 8 block radius towards you.</p>`;
+                    break;
+                }
+                case "LIGHTWEIGHT": {
+                    div_item += `<p class="majorid-title">Lightweight:</p>`;
+                    div_item += `<p class="majorid-desc">You no longer take fall damage.</p>`;
+                    break;
+                }
+                case "MADNESS": {
+                    div_item += `<p class="majorid-title">Madness:</p>`;
+                    div_item += `<p class="majorid-desc">Casts a random ability every 3 seconds.</p>`;
+                    break;
+                }
+                case "GREED": {
+                    div_item += `<p class="majorid-title">Greed:</p>`;
+                    div_item += `<p class="majorid-desc">Picking up emeralds heals you and nearby players for 15% max health.</p>`;
+                    break;
+                }
+                case "GUARDIAN": {
+                    div_item += `<p class="majorid-title">Guardian:</p>`;
+                    div_item += `<p class="majorid-desc">50% of damage taken by nearby allies is redirected to you.</p>`;
+                    break;
+                }
+                case "ENTROPY": {
+                    div_item += `<p class="majorid-title">Entropy:</p>`;
+                    div_item += `<p class="majorid-desc">Meteor falls three times faster.</p>`;
+                    break;
+                }
+                case "CAVALRYMAN": {
+                    div_item += `<p class="majorid-title">Cavalryman:</p>`;
+                    div_item += `<p class="majorid-desc">You may cast spells and attack with a 70% damage penalty while on a horse.</p>`;
+                    break;
+                }
+                case "ALTRUISM": {
+                    div_item += `<p class="majorid-title">Heart of the Pack:</p>`;
+                    div_item += `<p class="majorid-desc">Nearby players gain 35% of the health you naturally regenerate.</p>`;
+                    break;
+                }
+                case "HERO": {
+                    div_item += `<p class="majorid-title">Saviour's Sacrfice:</p>`;
+                    div_item += `<p class="majorid-desc">While under 30% maximum health, nearby allies gain 50% bonus damage and defence.</p>`;
+                    break;
+                }
+            }
+        } else {
+            switch(item.name) {
+                case "Infernal Impulse (1.20)":
+                case "Blossom Haze (1.20)": {
+                    div_item += `<p class="majorid-title">Cherry Bombs:</p>`;
+                    div_item += `<p class="majorid-desc">Your Smoke Bombs explode instantly on contact, dealing 110% damage each.</p>`;
+                    break;
+                }
+                case "Rhythm of Seasons (1.20)": {
+                    div_item += `<p class="majorid-title">Rally:</p>`;
+                    div_item += `<p class="majorid-desc">Charge heals you by 10% and nearby allies by 15% on impact, but becomes harmless.</p>`;
+                    break;
+                }
+                case "Panic Attack (1.20)":
+                case "Ornithopter (1.20)": {
+                    div_item += `<p class="majorid-title">Freerunner:</p>`;
+                    div_item += `<p class="majorid-desc">Double your sprint speed when your sprint bar is under 30%.</p>`;
+                    break;
+                }
+                case "Double Vision (1.20)": {
+                    div_item += `<p class="majorid-title">Lightweight:</p>`;
+                    div_item += `<p class="majorid-desc">You no longer take fall damage.</p>`;
+                    break;
+                }
+                case "The Jingling Jester (1.20)": {
+                    div_item += `<p class="majorid-title">Greed:</p>`;
+                    div_item += `<p class="majorid-desc">Picking up emeralds heals you and nearby players for 15% max health.</p>`;
+                    break;
+                }
+            }
+        }
+
         if (item.restrictions)
             div_item += `<p class="restrictions info">${item.restrictions}</p>`;
 
