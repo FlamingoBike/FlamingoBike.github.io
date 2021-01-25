@@ -707,16 +707,19 @@ function addFilter() {
 }
 
 function updateFilterList() {
+    let filterList = document.getElementById("filter-list");
+    filterList.innerHTML = "";
+
     let filterString = "";
     for (const f of filters) {
         switch (f["name"]) {
             case "majorid":
             case "untradable": {
-                filterString += `[${f["name"]}], `;
+                filterString += `<span class="filter-entry" onmousedown="deleteFilter('${f["name"]}')">[${f["name"]}]</span>, `;
                 break;
             }
             default: {
-                filterString += `[${f["name"]}: ${(f["invert"]) ? "descendant" : "ascendant"}], `;
+                filterString += `<span class="filter-entry" onmousedown="deleteFilter('${f["name"]}')">[${f["name"]}: ${(f["invert"]) ? "descendant" : "ascendant"}]</span>, `;
                 break;
             }
         }
@@ -724,7 +727,17 @@ function updateFilterList() {
     }
     filterString = filterString.substr(0, filterString.length - 2);
 
-    document.getElementById("filter-list").innerHTML = filterString;
+    filterList.insertAdjacentHTML("beforeend", filterString);
+}
+
+function deleteFilter(filterName) {
+    for (const f of filters) {
+        if (f["name"] == filterName) {
+            filters.splice(filters.indexOf(f), 1);
+        }
+    }
+    updateFilterList();
+    update();
 }
 
 function resetFields() {
