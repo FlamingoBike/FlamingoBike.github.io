@@ -525,6 +525,16 @@ function applyFilters(searchStr) {
                         return false;
                     break;
                 }
+                case "health": {
+                    if (!i["health"])
+                        return false;
+                    break;
+                }
+                case "totalhealth": {
+                    if (!i["health"] && !i["healthBonus"])
+                        return false;
+                    break;
+                }
                 default: {
                     /*if (i[sortType])
                         return true;

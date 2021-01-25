@@ -32,6 +32,27 @@ function customSort(a, b, types) {
         }
         break;
       }
+      case "health": {
+        if (t["invert"]) {
+          (a["health"] < b["health"]) ? toReturn = 1 : toReturn = -1;
+        } else {
+          (a["health"] < b["health"]) ? toReturn = -1 : toReturn = 1;
+        }
+        break;
+      }
+      case "totalhealth": {
+        let aTotal = (a["health"]) ? a["health"] : 0;
+        aTotal += (a["healthBonus"]["max"]) ? a["healthBonus"]["max"] : (a["healthBonus"]) ? a["healthBonus"] : 0;
+        let bTotal = (b["health"]) ? b["health"] : 0;
+        bTotal += (b["healthBonus"]["max"]) ? b["healthBonus"]["max"] : (b["healthBonus"]) ? b["healthBonus"] : 0;
+
+        if (t["invert"]) {
+          (aTotal < bTotal) ? toReturn = 1 : toReturn = -1;
+        } else {
+          (aTotal < bTotal) ? toReturn = -1 : toReturn = 1;
+        }
+        break;
+      }
       case "majorid":
       case "untradable": {
         break;
