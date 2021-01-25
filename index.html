@@ -9,97 +9,111 @@
     <body onload="requestItems()"> <!-- onload="requestItems()" -->
         <header>
             <h1>Wynncraft Items</h1>
-        <div class="search">
-            <input type="text" id="search" onkeydown="checkEnterUpdate(event)" placeholder="Search for an item..." /><button onclick="update()" id="search-btn">Search</button>
-            <input type="checkbox" id="mythic-filter" oncontextmenu="return false;" checked> Mythic
-            <input type="checkbox" id="fabled-filter" oncontextmenu="return false;" checked> Fabled
-            <input type="checkbox" id="legendary-filter" oncontextmenu="return false;" checked> Legendary
-            <input type="checkbox" id="rare-filter" oncontextmenu="return false;" checked> Rare
-            <input type="checkbox" id="unique-filter" oncontextmenu="return false;" checked> Unique
-            <input type="checkbox" id="set-filter" oncontextmenu="return false;" checked> Set
-            <input type="checkbox" id="normal-filter" oncontextmenu="return false;" checked> Normal
-            <input type="checkbox" id="wand-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Wands
-            <input type="checkbox" id="bow-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Bows
-            <input type="checkbox" id="dagger-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Daggers
-            <input type="checkbox" id="spear-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Spears
-            <input type="checkbox" id="relik-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Reliks
-            <input type="checkbox" id="ring-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Rings
-            <input type="checkbox" id="bracelet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Bracelet
-            <input type="checkbox" id="necklace-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Necklace
-            <input type="checkbox" id="helmet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Helmets
-            <input type="checkbox" id="chestplate-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Chestplates
-            <input type="checkbox" id="leggings-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Leggings
-            <input type="checkbox" id="boots-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Boots
-            &nbsp;&nbsp;&nbsp;Sorting:
-            <select id="sort-type-filter">
-                <option value="alphabetical" selected>Alphabetical</option>
-                <option value="level">Level</option>
-                <option value="majorid">Has Major ID</option>
-                <option value="untradable">Untradables Only</option>
-                <option value="agility">Agility Requirement</option>
-                <option value="defense">Defense Requirement</option>
-                <option value="dexterity">Dexterity Requirement</option>
-                <option value="intelligence">Intelligence Requirement</option>
-                <option value="strength">Strength Requirement</option>
-                <option value="agilityPoints">Agility Bonus</option>
-                <option value="defensePoints">Defense Bonus</option>
-                <option value="dexterityPoints">Dexterity Bonus</option>
-                <option value="intelligencePoints">Intelligence Bonus</option>
-                <option value="strengthPoints">Strength Bonus</option>
-                <option value="pointsSum">Skill Points Sum</option>
-                <option value="emeraldStealing">Stealing</option>
-                <option value="exploding">Exploding</option>
-                <option value="reflection">Reflection</option>
-                <option value="soulPoints">Soul Point Regen</option>
-                <option value="speed">Walk Speed</option>
-                <option value="jumpHeight">Jump Height</option>
-                <option value="lootBonus">Loot Bonus</option>
-                <option value="lootQuality">Loot Quality</option>
-                <option value="xpBonus">Combat XP Bonus</option>
-                <option value="sprint">Sprint Duration</option>
-                <option value="sprintRegen">Sprint Regen</option>
-                <option value="thorns">Thorns</option>
-                <option value="poison">Poison</option>
-                <option value="healthBonus">Health Bonus</option>
-                <option value="healthRegen">Health Regen %</option>
-                <option value="healthRegenRaw">Health Regen Raw</option>
-                <option value="lifeSteal">Life Steal</option>
-                <option value="manaRegen">Mana Regen</option>
-                <option value="manaSteal">Mana Steal</option>
-                <!--<option value="attackSpeed">Attack Speed</option>-->
-                <option value="attackSpeedBonus">Attack Speed Bonus</option>
-                <option value="bonusAirDamage">Air Damage %</option>
-                <option value="bonusAirDefense">Air Defense %</option>
-                <option value="bonusEarthDamage">Earth Damage %</option>
-                <option value="bonusEarthDefense">Earth Defense %</option>
-                <option value="bonusFireDamage">Fire Damage %</option>
-                <option value="bonusFireDefense">Fire Defense %</option>
-                <option value="bonusThunderDamage">Thunder Damage %</option>
-                <option value="bonusThunderDefense">Thunder Defense %</option>
-                <option value="bonusWaterDamage">Water Damage %</option>
-                <option value="bonusWaterDefense">Water Defense %</option>
-                <option value="damageBonus">Main Attack Damage %</option>
-                <option value="damageBonusRaw">Main Attack Damage Raw</option>
-                <option value="spellDamageRaw">Spell Damage Raw</option>
-                <option value="spellDamage">Spell Damage %</option>
-                <option value="spellCostPct1">1st Spell Cost %</option>
-                <option value="spellCostPct2">2nd Spell Cost %</option>
-                <option value="spellCostPct3">3rd Spell Cost %</option>
-                <option value="spellCostPct4">4th Spell Cost %</option>
-                <option value="spellCostRaw1">1st Spell Cost Raw</option>
-                <option value="spellCostRaw2">2nd Spell Cost Raw</option>
-                <option value="spellCostRaw3">3rd Spell Cost Raw</option>
-                <option value="spellCostRaw4">4th Spell Cost Raw</option>
-                <option value="gatherSpeed">Gathering Speed %</option>
-                <option value="gatherXpBonus">Gathering XP %</option>
-            </select>
-            <input type="checkbox" id="sort-invert-filter" checked> Descendant?
-            <button onclick="addFilter()">Add Filter</button>
-            &nbsp;&nbsp;&nbsp;
-            <button onclick="resetFields()">Reset</button>
-            <div><p>Filters: <span style="font-weight: bold" id="filter-list"></span></p></div>
-        </div>
         </header>
+        <div class="search flex fl-column">
+            <!-- Search bar -->
+            <div>
+                <input type="text" id="search" onkeydown="checkEnterUpdate(event)" placeholder="Search for an item..." /><button onclick="update()" id="search-btn">Search</button>
+            </div>
+            <div>
+                Rarity:
+                <input type="checkbox" id="mythic-filter" oncontextmenu="return false;" checked> Mythic
+                <input type="checkbox" id="fabled-filter" oncontextmenu="return false;" checked> Fabled
+                <input type="checkbox" id="legendary-filter" oncontextmenu="return false;" checked> Legendary
+                <input type="checkbox" id="rare-filter" oncontextmenu="return false;" checked> Rare
+                <input type="checkbox" id="unique-filter" oncontextmenu="return false;" checked> Unique
+                <input type="checkbox" id="set-filter" oncontextmenu="return false;" checked> Set
+                <input type="checkbox" id="normal-filter" oncontextmenu="return false;" checked> Normal
+                <input type="checkbox" id="boots-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Boots
+            </div>
+            <div>
+                Category:
+                <input type="checkbox" id="wand-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Wands
+                <input type="checkbox" id="bow-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Bows
+                <input type="checkbox" id="dagger-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Daggers
+                <input type="checkbox" id="spear-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Spears
+                <input type="checkbox" id="relik-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Reliks
+                <input type="checkbox" id="ring-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Rings
+                <input type="checkbox" id="bracelet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Bracelet
+                <input type="checkbox" id="necklace-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Necklace
+                <input type="checkbox" id="helmet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Helmets
+                <input type="checkbox" id="chestplate-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Chestplates
+                <input type="checkbox" id="leggings-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Leggings
+                
+            </div>
+            <div>
+                Sorting:
+                <select id="sort-type-filter">
+                    <option value="alphabetical" selected>Alphabetical</option>
+                    <option value="level">Level</option>
+                    <option value="majorid">Has Major ID</option>
+                    <option value="untradable">Untradables Only</option>
+                    <option value="agility">Agility Requirement</option>
+                    <option value="defense">Defense Requirement</option>
+                    <option value="dexterity">Dexterity Requirement</option>
+                    <option value="intelligence">Intelligence Requirement</option>
+                    <option value="strength">Strength Requirement</option>
+                    <option value="agilityPoints">Agility Bonus</option>
+                    <option value="defensePoints">Defense Bonus</option>
+                    <option value="dexterityPoints">Dexterity Bonus</option>
+                    <option value="intelligencePoints">Intelligence Bonus</option>
+                    <option value="strengthPoints">Strength Bonus</option>
+                    <option value="pointsSum">Skill Points Sum</option>
+                    <option value="emeraldStealing">Stealing</option>
+                    <option value="exploding">Exploding</option>
+                    <option value="reflection">Reflection</option>
+                    <option value="soulPoints">Soul Point Regen</option>
+                    <option value="speed">Walk Speed</option>
+                    <option value="jumpHeight">Jump Height</option>
+                    <option value="lootBonus">Loot Bonus</option>
+                    <option value="lootQuality">Loot Quality</option>
+                    <option value="xpBonus">Combat XP Bonus</option>
+                    <option value="sprint">Sprint Duration</option>
+                    <option value="sprintRegen">Sprint Regen</option>
+                    <option value="thorns">Thorns</option>
+                    <option value="poison">Poison</option>
+                    <option value="healthBonus">Health Bonus</option>
+                    <option value="healthRegen">Health Regen %</option>
+                    <option value="healthRegenRaw">Health Regen Raw</option>
+                    <option value="lifeSteal">Life Steal</option>
+                    <option value="manaRegen">Mana Regen</option>
+                    <option value="manaSteal">Mana Steal</option>
+                    <!--<option value="attackSpeed">Attack Speed</option>-->
+                    <option value="attackSpeedBonus">Attack Speed Bonus</option>
+                    <option value="bonusAirDamage">Air Damage %</option>
+                    <option value="bonusAirDefense">Air Defense %</option>
+                    <option value="bonusEarthDamage">Earth Damage %</option>
+                    <option value="bonusEarthDefense">Earth Defense %</option>
+                    <option value="bonusFireDamage">Fire Damage %</option>
+                    <option value="bonusFireDefense">Fire Defense %</option>
+                    <option value="bonusThunderDamage">Thunder Damage %</option>
+                    <option value="bonusThunderDefense">Thunder Defense %</option>
+                    <option value="bonusWaterDamage">Water Damage %</option>
+                    <option value="bonusWaterDefense">Water Defense %</option>
+                    <option value="damageBonus">Main Attack Damage %</option>
+                    <option value="damageBonusRaw">Main Attack Damage Raw</option>
+                    <option value="spellDamageRaw">Spell Damage Raw</option>
+                    <option value="spellDamage">Spell Damage %</option>
+                    <option value="spellCostPct1">1st Spell Cost %</option>
+                    <option value="spellCostPct2">2nd Spell Cost %</option>
+                    <option value="spellCostPct3">3rd Spell Cost %</option>
+                    <option value="spellCostPct4">4th Spell Cost %</option>
+                    <option value="spellCostRaw1">1st Spell Cost Raw</option>
+                    <option value="spellCostRaw2">2nd Spell Cost Raw</option>
+                    <option value="spellCostRaw3">3rd Spell Cost Raw</option>
+                    <option value="spellCostRaw4">4th Spell Cost Raw</option>
+                    <option value="gatherSpeed">Gathering Speed %</option>
+                    <option value="gatherXpBonus">Gathering XP %</option>
+                </select>
+                <input type="checkbox" id="sort-invert-filter" checked> Descendant?
+            </div>
+            <div>
+                <button onclick="resetFields()">Reset</button>
+            </div>
+            <div>
+                <p>Filters: <span style="font-weight: bold" id="filter-list"></span></p>
+            </div>
+        </div>
         <div class="flex fl-row fl-wrap fl-space-around" id="items-display">
             <div class="loader">
                 <div class="bar"></div>

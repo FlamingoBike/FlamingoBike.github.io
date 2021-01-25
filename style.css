@@ -52,7 +52,7 @@ header h1 {
     margin: 0;
     margin-bottom: 10px;
 
-    padding: 10px;
+    padding: 20px;
     background-color: #252525;
 }
 
@@ -283,6 +283,16 @@ header h1 {
 #items-display .item .side .group {
     margin-bottom: 2px;
     margin-top: 2px;
+}
+
+#items-display .item .majorid-title {
+    color: #ec8626;
+    font-weight: bold;
+}
+
+#items-display .item .majorid-desc {
+    color: #ec8626;
+    font-style: italic;
 }
 
 /* Item stat */
