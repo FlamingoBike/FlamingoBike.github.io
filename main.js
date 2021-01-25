@@ -767,6 +767,12 @@ function resetFields() {
     }
     searchField.value = "";
     filters = [];
+
+    levelMinFilter.value = 0;
+    levelMaxFilter.value = 106;
+    levelRange["min"] = 0;
+    levelRange["max"] = 106;
+
     updateFilterList();
     update();
 }
