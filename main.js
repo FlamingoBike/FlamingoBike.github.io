@@ -1,4 +1,5 @@
 let allItems = [];
+let filters = [];
 let loaded = false;
 
 const idsToModify = ["attackSpeedBonus", "bonusAirDamage", "bonusAirDefense", "bonusEarthDamage", "bonusEarthDefense", "bonusFireDamage", "bonusFireDefense", "bonusThunderDamage", "bonusThunderDefense", "bonusWaterDamage", "bonusWaterDefense", "damageBonus", "damageBonusRaw", "emeraldStealing", "exploding", "gatherSpeed", "gatherXpBonus", "healthBonus", "healthRegen", "healthRegenRaw", "jumpHeight", "lifeSteal", "lootBonus", "lootQuality", "manaRegen", "manaSteal", "poison", "rainbowSpellDamageRaw", "reflection", "soulPoints", "speed", "spellCostPct1", "spellCostPct2", "spellCostPct3", "spellCostPct4", "spellCostRaw1", "spellCostRaw2", "spellCostRaw3", "spellCostRaw4", "spellDamage", "spellDamageRaw", "sprint", "sprintRegen", "thorns", "xpBonus"];
@@ -365,8 +366,9 @@ function updateItemDisplay(itemsToDisplay) {
 }
 
 function applyFilters(searchStr) {
-    let sortType = sortTypeFilter.value;
-    return allItems
+    //let sortType = sortTypeFilter.value;
+    //let filters = [{ 'name': 'level', 'invert': false }, { 'name': 'pointsSum', 'invert': false }];
+    let sortedArray = allItems
     .filter((i) => {
         return i["name"].toLowerCase().includes(searchStr.toLowerCase());
     })
@@ -485,108 +487,62 @@ function applyFilters(searchStr) {
             return true;
     })
     .filter((i) => {
-        switch (sortType) {
-            case "alphabetical":
-            case "level": {
-                return true;
-            }
-            case "pointsSum": {
-                return (i["agilityPoints"] !== 0 || i["dexterityPoints"] !== 0 || i["strengthPoints"] !== 0 || i["defensePoints"] !== 0 || i["intelligencePoints"] !== 0);
-            }
-            case "majorid": {
-                if (i["majorIds"]) {
-                    console.log(i);
-                    return true;
-                } else {
-                    switch(i["name"]) {
-                        case "Infernal Impulse (1.20)":
-                        case "Blossom Haze (1.20)":
-                        case "Rhythm of Seasons (1.20)":
-                        case "Panic Attack (1.20)":
-                        case "Ornithopter (1.20)":
-                        case "Double Vision (1.20)":
-                        case "The Jingling Jester (1.20)":
-                            return true;
-                        default:
-                            return false;
-                    }
+        for (const f of filters) {
+            switch (f["name"]) {
+                case "alphabetical":
+                case "level": {
+                    break;
                 }
-            }
-            case "untradable": {
-                return i["restrictions"];
-            }
-            default: {
-                if (i[sortType])
-                    return true;
-                else
-                    return false;
-            }
-        }
-    })
-    .sort((a, b) => {
-        let toReturn = 0;
-        switch (sortType) {
-            case "alphabetical": {
-                if (sortInvertFilter.checked) {
-                    (a["name"] < b["name"]) ? toReturn = -1 : toReturn = 1;
-                } else {
-                    (a["name"] < b["name"]) ? toReturn = 1 : toReturn = -1;
+                case "pointsSum": {
+                    //toReturn = (i["agilityPoints"] !== 0 || i["dexterityPoints"] !== 0 || i["strengthPoints"] !== 0 || i["defensePoints"] !== 0 || i["intelligencePoints"] !== 0);
+                    if (!(i["agilityPoints"] !== 0 || i["dexterityPoints"] !== 0 || i["strengthPoints"] !== 0 || i["defensePoints"] !== 0 || i["intelligencePoints"] !== 0))
+                        return false;
+                    break;
                 }
-                break;
-            }
-            case "level": {
-                if (sortInvertFilter.checked) {
-                    (a["level"] < b["level"]) ? toReturn = 1 : toReturn = -1;
-                } else {
-                    (a["level"] < b["level"]) ? toReturn = -1 : toReturn = 1;
-                }
-                break;
-            }
-            case "pointsSum": {
-                let aSum = a["agilityPoints"] + a["dexterityPoints"] + a["strengthPoints"] + a["defensePoints"] + a["intelligencePoints"];
-                let bSum = b["agilityPoints"] + b["dexterityPoints"] + b["strengthPoints"] + b["defensePoints"] + b["intelligencePoints"];
-                if (sortInvertFilter.checked) {
-                    (aSum < bSum) ? toReturn = 1 : toReturn = -1;
-                } else {
-                    (aSum < bSum) ? toReturn = -1 : toReturn = 1;
-                }
-                break;
-            }
-            case "majorid":
-            case "untradable": {
-                break;
-            }
-            default: {
-                if (a[sortType] === 0) {
-                    return 1;
-                } else if (b[sortType] === 0) {
-                    return -1;
-                } else {
-                    let statA = (typeof (a[sortType]) === "object") ? a[sortType]["max"] : a[sortType];
-                    let statB = (typeof (b[sortType]) === "object") ? b[sortType]["max"] : b[sortType];
-                    if (sortInvertFilter.checked) {
-                        //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
-                        //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = 1 : toReturn = -1;
-                        if (sortType.substr(0, sortType.length - 4) === "spellCost") {
-                            (statA < statB) ? toReturn = -1 : toReturn = 1;
-                        } else {
-                            (statA > statB) ? toReturn = -1 : toReturn = 1;
-                        }
-                    } else {
-                        //console.log(`A: ${a[sortType]["max"]}, B: ${b[sortType]["max"]}`);
-                        //(a[sortType]["max"] > b[sortType]["max"]) ? toReturn = -1 : toReturn = 1;
-                        if (sortType.substr(0, sortType.length - 4) === "spellCost") {
-                            (statA < statB) ? toReturn = 1 : toReturn = -1;
-                        } else {
-                            (statA > statB) ? toReturn = 1 : toReturn = -1;
+                case "majorid": {
+                    /*if (i["majorIds"]) {
+                        console.log(i);
+                        return true;
+                    } else*/ if (!i["majorIds"]) {
+                        switch(i["name"]) {
+                            case "Infernal Impulse (1.20)":
+                            case "Blossom Haze (1.20)":
+                            case "Rhythm of Seasons (1.20)":
+                            case "Panic Attack (1.20)":
+                            case "Ornithopter (1.20)":
+                            case "Double Vision (1.20)":
+                            case "The Jingling Jester (1.20)":
+                                break;
+                            default:
+                                return false;
                         }
                     }
+                    break;
                 }
-                break;
+                case "untradable": {
+                    //return i["restrictions"];
+                    if (!i["restrictions"])
+                        return false;
+                    break;
+                }
+                default: {
+                    /*if (i[sortType])
+                        return true;
+                    else*/
+                    if (!i[f["name"]])
+                        return false;
+                    break;
+                }
             }
         }
-        return toReturn;
+        return true;
     });
+
+    sortedArray = sortedArray.sort((a, b) => {
+        return customSort(a, b, filters);
+    });
+    
+    return sortedArray;
 }
 
 function uncheckAll(event) {
@@ -731,11 +687,52 @@ function checkEnterUpdate(event) {
     }
 }
 
+function addFilter() {
+    let filterName = sortTypeFilter.value;
+    let filterInvert = sortInvertFilter.checked;
+    
+    let alreadyAdded = false;
+    for (const f of filters) {
+        if (f["name"] == filterName) {
+            alreadyAdded = true;
+            break;
+        }
+    }
+    if (!alreadyAdded) {
+        filters.push({name: filterName, invert: filterInvert});
+        //console.log(filters);
+        updateFilterList();
+        update();
+    }
+}
+
+function updateFilterList() {
+    let filterString = "";
+    for (const f of filters) {
+        switch (f["name"]) {
+            case "majorid":
+            case "untradable": {
+                filterString += `[${f["name"]}], `;
+                break;
+            }
+            default: {
+                filterString += `[${f["name"]}: ${(f["invert"]) ? "descendant" : "ascendant"}], `;
+                break;
+            }
+        }
+        
+    }
+    filterString = filterString.substr(0, filterString.length - 2);
+
+    document.getElementById("filter-list").innerHTML = filterString;
+}
+
 function resetFields() {
     for (const chkbox of checkboxFilters) {
         chkbox.checked = true;
     }
     searchField.value = "";
+    filters = [];
     update();
 }
 
