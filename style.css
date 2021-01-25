@@ -135,9 +135,17 @@ header h1 {
     content: '✹ Fire';
 }
 
+.fire-color {
+    color: #FF5555;
+}
+
 .water-type::before {
     color: #55FFFF;
     content: '❉ Water';
+}
+
+.water-color {
+    color: #55FFFF;
 }
 
 .air-type::before {
@@ -145,14 +153,26 @@ header h1 {
     content: '❋ Air';
 }
 
+.air-color {
+    color: #FFFFFF;
+}
+
 .thunder-type::before {
     color: #FFFF55;
     content: '✦ Thunder';
 }
 
+.thunder-color {
+    color: #FFFF55;
+}
+
 .earth-type::before {
     color: #00AA00;
     content: '✤ Earth';
+}
+
+.earth-color {
+    color: #00AA00;
 }
 
 .health {

@@ -158,7 +158,7 @@ function updateItemDisplay(itemsToDisplay) {
                 // Add weapon's damage
                 div_item += '<div class="side">';
                 for (const t in id_dictionary.DAMAGES) {
-                    if (item[t] != '0-0' && item[t] != 0)
+                    if (item[t] && item[t] != '0-0' && item[t] != 0)
                         div_item += `<p class="${id_dictionary.DAMAGES[t]} group"> Damage: ${item[t]}</p>`;
                 }
                 div_item += '</div>';
@@ -173,7 +173,7 @@ function updateItemDisplay(itemsToDisplay) {
                 // Show armor's defenses
                 div_item += '<div class="side">';
                 for (const t in id_dictionary.DEFENSES) {
-                    if (item[t] != '0-0' && item[t] != 0)
+                    if (item[t] && item[t] != '0-0' && item[t] != 0)
                         div_item += `<p class="${id_dictionary.DEFENSES[t]} group"> Defense: ${item[t]}</p>`;
                 }
                 div_item += '</div>';
@@ -185,19 +185,19 @@ function updateItemDisplay(itemsToDisplay) {
 
         // Add Stats requirement
         if (item.strength > 0) {
-            div_item += `<p class="group">Strength Min: ${item.strength}</p>`;
+            div_item += `<p class="group"><span class="earth-color">Strength</span> Min: ${item.strength}</p>`;
         }
         if (item.agility > 0) {
-            div_item += `<p class="group">Agility Min: ${item.agility}</p>`;
+            div_item += `<p class="group"><span class="air-color">Agility</span> Min: ${item.agility}</p>`;
         }
         if (item.defense > 0) {
-            div_item += `<p class="group">Defense Min: ${item.defense}</p>`;
+            div_item += `<p class="group"><span class="fire-color">Defense</span> Min: ${item.defense}</p>`;
         }
         if (item.intelligence > 0) {
-            div_item += `<p class="group">Intelligence Min: ${item.intelligence}</p>`;
+            div_item += `<p class="group"><span class="water-color">Intelligence</span> Min: ${item.intelligence}</p>`;
         }
         if (item.dexterity > 0) {
-            div_item += `<p class="group">Dexterity Min: ${item.dexterity}</p>`;
+            div_item += `<p class="group"><span class="thunder-color">Dexterity</span> Min: ${item.dexterity}</p>`;
         }
         // Close stats div
         div_item += '</div>';
