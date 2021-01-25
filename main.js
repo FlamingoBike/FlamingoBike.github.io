@@ -541,7 +541,7 @@ function applyFilters(searchStr) {
     sortedArray = sortedArray.sort((a, b) => {
         return customSort(a, b, filters);
     });
-    
+
     return sortedArray;
 }
 
@@ -733,6 +733,7 @@ function resetFields() {
     }
     searchField.value = "";
     filters = [];
+    updateFilterList();
     update();
 }
 
