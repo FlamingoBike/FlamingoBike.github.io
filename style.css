@@ -231,6 +231,16 @@ header h1 {
     color: #101010;
 }
 
+.filter-entry::before {
+    content: '[x] ';
+    font-weight: bold;
+    color: #AA0000;
+}
+
+.filter-entry {
+    font-weight: bold;
+}
+
 /* Item info style */
 #items-display .item {
     margin: 10px;
