@@ -512,6 +512,9 @@ function applyFilters(searchStr) {
                     }
                 }
             }
+            case "untradable": {
+                return i["restrictions"];
+            }
             default: {
                 if (i[sortType])
                     return true;
@@ -549,7 +552,8 @@ function applyFilters(searchStr) {
                 }
                 break;
             }
-            case "majorid": {
+            case "majorid":
+            case "untradable": {
                 break;
             }
             default: {
