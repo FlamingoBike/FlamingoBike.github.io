@@ -493,6 +493,25 @@ function applyFilters(searchStr) {
             case "pointsSum": {
                 return (i["agilityPoints"] !== 0 || i["dexterityPoints"] !== 0 || i["strengthPoints"] !== 0 || i["defensePoints"] !== 0 || i["intelligencePoints"] !== 0);
             }
+            case "majorid": {
+                if (i["majorIds"]) {
+                    console.log(i);
+                    return true;
+                } else {
+                    switch(i["name"]) {
+                        case "Infernal Impulse (1.20)":
+                        case "Blossom Haze (1.20)":
+                        case "Rhythm of Seasons (1.20)":
+                        case "Panic Attack (1.20)":
+                        case "Ornithopter (1.20)":
+                        case "Double Vision (1.20)":
+                        case "The Jingling Jester (1.20)":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+            }
             default: {
                 if (i[sortType])
                     return true;
@@ -528,6 +547,9 @@ function applyFilters(searchStr) {
                 } else {
                     (aSum < bSum) ? toReturn = -1 : toReturn = 1;
                 }
+                break;
+            }
+            case "majorid": {
                 break;
             }
             default: {
