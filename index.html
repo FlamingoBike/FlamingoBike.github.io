@@ -108,6 +108,11 @@
                     <option value="gatherXpBonus">Gathering XP %</option>
                 </select>
                 <input type="checkbox" id="sort-invert-filter" checked> Descendant?
+                &nbsp;&nbsp;&nbsp;
+                Level Range:
+                <input type="number" id="level-min-filter" value="0" onchange="checkAndUpdateLevelRange()">
+                -
+                <input type="number" id="level-max-filter" value="106" onchange="checkAndUpdateLevelRange()">
             </div>
             <div>
                 <button onclick="addFilter()">Add Filter</button>

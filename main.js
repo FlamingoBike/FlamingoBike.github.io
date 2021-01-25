@@ -120,7 +120,12 @@ const sortInvertFilter = document.getElementById("sort-invert-filter");
 
 const checkboxFilters = [sortInvertFilter, mythicFilter, fabledFilter, legendaryFilter, rareFilter, uniqueFilter, setFilter, normalFilter, wandFilter, bowFilter, daggerFilter, spearFilter, relikFilter, ringFilter, braceletFilter, necklaceFilter, helmetFilter, chestplateFilter, leggingsFilter, bootsFilter];
 
+const levelMinFilter = document.getElementById("level-min-filter");
+const levelMaxFilter = document.getElementById("level-max-filter");
+
 const itemLimit = 200;
+
+const levelRange = { min: levelMinFilter.value, max: levelMaxFilter.value};
 
 // Event Listeners on Checkboxes
 for (const checkbox of checkboxFilters) {
@@ -487,6 +492,12 @@ function applyFilters(searchStr) {
             return true;
     })
     .filter((i) => {
+        if (i["level"] >= levelRange["min"] && i["level"] <= levelRange["max"])
+            return true;
+        else
+            return false;
+    })
+    .filter((i) => {
         for (const f of filters) {
             switch (f["name"]) {
                 case "alphabetical":
@@ -757,6 +768,26 @@ function resetFields() {
     searchField.value = "";
     filters = [];
     updateFilterList();
+    update();
+}
+
+function checkAndUpdateLevelRange() {
+    let minLevel = parseInt(levelMinFilter.value);
+    let maxLevel = parseInt(levelMaxFilter.value);
+
+    if (minLevel < 0) {
+        levelMinFilter.value = 0;
+        minLevel = 0;
+    }
+
+    if (maxLevel < minLevel) {
+        levelMaxFilter.value = minLevel;
+        maxLevel = minLevel;
+    }
+
+    levelRange["min"] = minLevel;
+    levelRange["max"] = maxLevel;
+
     update();
 }
 
