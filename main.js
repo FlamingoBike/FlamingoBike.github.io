@@ -73,6 +73,7 @@ const id_dictionary = Object.freeze({
         gatherXpBonus: "Gathering XP %"
     },
     DAMAGES: {
+        damage          : 'neutral-type',
         fireDamage      : 'fire-type',
         waterDamage     : 'water-type',
         airDamage       : 'air-type',
