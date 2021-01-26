@@ -120,6 +120,9 @@ const sortTypeFilter = document.getElementById("sort-type-filter");
 const sortInvertFilter = document.getElementById("sort-invert-filter");
 
 const checkboxFilters = [sortInvertFilter, mythicFilter, fabledFilter, legendaryFilter, rareFilter, uniqueFilter, setFilter, normalFilter, wandFilter, bowFilter, daggerFilter, spearFilter, relikFilter, ringFilter, braceletFilter, necklaceFilter, helmetFilter, chestplateFilter, leggingsFilter, bootsFilter];
+const weaponCheckboxes = [wandFilter, bowFilter, daggerFilter, spearFilter, relikFilter];
+const accessoriesCheckboxes = [ringFilter, braceletFilter, necklaceFilter];
+const armorCheckboxes = [helmetFilter, chestplateFilter, leggingsFilter, bootsFilter];
 
 const levelMinFilter = document.getElementById("level-min-filter");
 const levelMaxFilter = document.getElementById("level-max-filter");
@@ -797,6 +800,49 @@ function checkAndUpdateLevelRange() {
 
     update();
 }
+
+function filterWeapons() {
+    for (const c of weaponCheckboxes) {
+        c.checked = true;
+    }
+    for (const c of accessoriesCheckboxes) {
+        c.checked = false;
+    }
+    for (const c of armorCheckboxes) {
+        c.checked = false;
+    }
+
+    update();
+}
+
+function filterAccessories() {
+    for (const c of weaponCheckboxes) {
+        c.checked = false;
+    }
+    for (const c of accessoriesCheckboxes) {
+        c.checked = true;
+    }
+    for (const c of armorCheckboxes) {
+        c.checked = false;
+    }
+
+    update();
+}
+
+function filterArmor() {
+    for (const c of weaponCheckboxes) {
+        c.checked = false;
+    }
+    for (const c of accessoriesCheckboxes) {
+        c.checked = false;
+    }
+    for (const c of armorCheckboxes) {
+        c.checked = true;
+    }
+
+    update();
+}
+
 
 function debug(name) {
     console.log(allItems.find((i) => {return i["name"] === name}));
