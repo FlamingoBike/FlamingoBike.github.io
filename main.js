@@ -328,34 +328,19 @@ function updateItemDisplay(itemsToDisplay) {
                     div_item += `<p class="majorid-desc">While under 30% maximum health, nearby allies gain 50% bonus damage and defence.</p>`;
                     break;
                 }
-            }
-        } else {
-            switch(item.name) {
-                case "Infernal Impulse (1.20)":
-                case "Blossom Haze (1.20)": {
+                case "CHERRY_BOMBS": {
                     div_item += `<p class="majorid-title">Cherry Bombs:</p>`;
                     div_item += `<p class="majorid-desc">Your Smoke Bombs explode instantly on contact, dealing 110% damage each.</p>`;
                     break;
                 }
-                case "Rhythm of Seasons (1.20)": {
+                case "RALLY": {
                     div_item += `<p class="majorid-title">Rally:</p>`;
                     div_item += `<p class="majorid-desc">Charge heals you by 10% and nearby allies by 15% on impact, but becomes harmless.</p>`;
                     break;
                 }
-                case "Panic Attack (1.20)":
-                case "Ornithopter (1.20)": {
+                case "FREERUNNER": {
                     div_item += `<p class="majorid-title">Freerunner:</p>`;
                     div_item += `<p class="majorid-desc">Double your sprint speed when your sprint bar is under 30%.</p>`;
-                    break;
-                }
-                case "Double Vision (1.20)": {
-                    div_item += `<p class="majorid-title">Lightweight:</p>`;
-                    div_item += `<p class="majorid-desc">You no longer take fall damage.</p>`;
-                    break;
-                }
-                case "The Jingling Jester (1.20)": {
-                    div_item += `<p class="majorid-title">Greed:</p>`;
-                    div_item += `<p class="majorid-desc">Picking up emeralds heals you and nearby players for 15% max health.</p>`;
                     break;
                 }
             }
@@ -520,7 +505,7 @@ function applyFilters(searchStr) {
                         console.log(i);
                         return true;
                     } else*/ if (!i["majorIds"]) {
-                        switch(i["name"]) {
+                        /*switch(i["name"]) {
                             case "Infernal Impulse (1.20)":
                             case "Blossom Haze (1.20)":
                             case "Rhythm of Seasons (1.20)":
@@ -531,7 +516,8 @@ function applyFilters(searchStr) {
                                 break;
                             default:
                                 return false;
-                        }
+                        }*/
+                        return false;
                     }
                     break;
                 }
@@ -637,7 +623,7 @@ function finishedLoading() {
 }
 
 function requestItems() {
-    fetch("./formatteditems.json").then((data) => {
+    fetch("./newapiitems.json").then((data) => {
         data.json().then((data) => {
             allItems = data;
             //convertIds();
@@ -656,8 +642,9 @@ $(document).ready(function () {
     $.ajax({
         url: "https://api.wynncraft.com/public_api.php?action=itemDB&category=all",
         success: (data) => {
-            //allItems = data["items"];
-            //convertIds();
+            allItems = data["items"];
+            convertIds();
+            console.log(allItems);
             //finishedLoading();
             //let apiItems = data["items"];
 
@@ -694,7 +681,6 @@ $(document).ready(function () {
 
         }
     });
-    //isLoaded();
     isLoaded();
 }*/
 
