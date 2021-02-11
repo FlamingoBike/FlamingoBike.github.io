@@ -17,28 +17,47 @@
             </div>
             <div>
                 Rarity:
-                <input type="checkbox" id="mythic-filter" oncontextmenu="return false;" checked> Mythic
-                <input type="checkbox" id="fabled-filter" oncontextmenu="return false;" checked> Fabled
-                <input type="checkbox" id="legendary-filter" oncontextmenu="return false;" checked> Legendary
-                <input type="checkbox" id="rare-filter" oncontextmenu="return false;" checked> Rare
-                <input type="checkbox" id="unique-filter" oncontextmenu="return false;" checked> Unique
-                <input type="checkbox" id="set-filter" oncontextmenu="return false;" checked> Set
-                <input type="checkbox" id="normal-filter" oncontextmenu="return false;" checked> Normal
+                <input type="checkbox" id="mythic-filter" oncontextmenu="return false;" checked>
+                <label for="mythic-filter">Mythic</label>
+                <input type="checkbox" id="fabled-filter" oncontextmenu="return false;" checked>
+                <label for="fabled-filter">Fabled</label>
+                <input type="checkbox" id="legendary-filter" oncontextmenu="return false;" checked>
+                <label for="legendary-filter">Legendary</label>
+                <input type="checkbox" id="rare-filter" oncontextmenu="return false;" checked>
+                <label for="rare-filter">Rare</label>
+                <input type="checkbox" id="unique-filter" oncontextmenu="return false;" checked>
+                <label for="unique-filter">Unique</label>
+                <input type="checkbox" id="set-filter" oncontextmenu="return false;" checked>
+                <label for="set-filter">Set</label>
+                <input type="checkbox" id="normal-filter" oncontextmenu="return false;" checked>
+                <label for="normal-filter">Normal</label>
             </div>
             <div>
                 Category:
-                <input type="checkbox" id="wand-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Wands
-                <input type="checkbox" id="bow-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Bows
-                <input type="checkbox" id="dagger-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Daggers
-                <input type="checkbox" id="spear-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Spears
-                <input type="checkbox" id="relik-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Reliks
-                <input type="checkbox" id="ring-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Rings
-                <input type="checkbox" id="bracelet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Bracelet
-                <input type="checkbox" id="necklace-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Necklace
-                <input type="checkbox" id="helmet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Helmets
-                <input type="checkbox" id="chestplate-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Chestplates
-                <input type="checkbox" id="leggings-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Leggings
-                <input type="checkbox" id="boots-filter" oncontextmenu="return false;" onmousedown="update(event)" checked> Boots
+                <input type="checkbox" id="wand-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="wand-filter">Wands</label>
+                <input type="checkbox" id="bow-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="bow-filter">Bows</label>
+                <input type="checkbox" id="dagger-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="dagger-filter">Daggers</label>
+                <input type="checkbox" id="spear-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="spear-filter">Spears</label>
+                <input type="checkbox" id="relik-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="relik-filter">Reliks</label>
+                <input type="checkbox" id="ring-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="ring-filter">Rings</label>
+                <input type="checkbox" id="bracelet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="bracelet-filter">Bracelets</label>
+                <input type="checkbox" id="necklace-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="necklace-filter">Necklaces</label>
+                <input type="checkbox" id="helmet-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="helmet-filter">Helmets</label>
+                <input type="checkbox" id="chestplate-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="chestplate-filter">Chestplates</label>
+                <input type="checkbox" id="leggings-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="leggings-filter">Leggings</label>
+                <input type="checkbox" id="boots-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="boots-filter">Boots</label>
                 &nbsp;
                 <button onclick="filterWeapons()">Weapons Only</button>
                 <button onclick="filterAccessories()">Accessories Only</button>
@@ -110,7 +129,8 @@
                     <option value="gatherSpeed">Gathering Speed %</option>
                     <option value="gatherXpBonus">Gathering XP %</option>
                 </select>
-                <input type="checkbox" id="sort-invert-filter" checked> Descendant?
+                <input type="checkbox" id="sort-invert-filter" checked>
+                <label for="sort-invert-filter">Descendant?</label>
                 &nbsp;&nbsp;&nbsp;
                 Level Range:
                 <input type="number" id="level-min-filter" value="0" onchange="checkAndUpdateLevelRange()">

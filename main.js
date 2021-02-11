@@ -345,6 +345,8 @@ function updateItemDisplay(itemsToDisplay) {
             }
         }
 
+        if (item.sockets)
+            div_item += `<p class="restrictions info">[${item.sockets}] Powder Slots</p>`;
         if (item.restrictions)
             div_item += `<p class="restrictions info">${item.restrictions}</p>`;
 
