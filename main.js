@@ -176,6 +176,7 @@ function updateItemDisplay(itemsToDisplay) {
                 // Show class requirement for weapon
                 div_item += `<div class="side"><p class="group">Class Req: ${id_dictionary.CLASSES[item.type]}</p></div>`;
             break;
+            case 'accessory':
             case 'armor':
                 if (item.health)
                     div_item += `<p class="health side"> Health: ${item.health}</p>`;
