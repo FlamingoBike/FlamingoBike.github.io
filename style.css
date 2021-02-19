@@ -347,6 +347,27 @@ header h1 {
      animation-delay: 0.5s;
 }
 
+.small-svg-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.star0 {
+    color: #555555;
+}
+
+.star1 {
+    color: #FFF799;
+}
+
+.star2 {
+    color: #FFFF00;
+}
+
+.star3 {
+    color: #E54C00;
+}
+
 @keyframes bar {
     0% {
         transform: scaleY(1) scaleX(0.5);

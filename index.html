@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Wynncraft Item Display</title>
+        <title>Wynncraft Items</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="select2.css">
         <script src="libs/jquery.js"></script>
     </head>
-    <body onload="requestItems()"> <!-- onload="requestItems()" -->
+    <body onload="requestItems()">
         <header>
             <h1>Wynncraft Items</h1>
+            <a href="indexIngredients.html" style="color: white;">Ingredients >></a>
         </header>
         <div class="search flex fl-column">
             <!-- Search bar -->
@@ -116,8 +117,8 @@
                     <option value="bonusWaterDefense">Water Defense %</option>
                     <option value="damageBonus">Main Attack Damage %</option>
                     <option value="damageBonusRaw">Main Attack Damage Raw</option>
-                    <option value="spellDamageRaw">Spell Damage Raw</option>
                     <option value="spellDamage">Spell Damage %</option>
+                    <option value="spellDamageRaw">Spell Damage Raw</option>
                     <option value="spellCostPct1">1st Spell Cost %</option>
                     <option value="spellCostPct2">2nd Spell Cost %</option>
                     <option value="spellCostPct3">3rd Spell Cost %</option>
@@ -154,8 +155,8 @@
             </div>
         </div>
 
-        <script src="main.js"></script>
+        <script src="itemsMain.js"></script>
         <script src="select2.js"></script>
-        <script src="sort.js"></script>
+        <script src="sortItems.js"></script>
     </body>
 </html>

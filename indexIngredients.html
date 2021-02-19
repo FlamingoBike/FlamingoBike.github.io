@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wynncraft Ingredients</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="select2.css">
+        <script src="libs/jquery.js"></script>
+    </head>
+    <body onload="requestIngredients()">
+        <header>
+            <h1>Wynncraft Ingredients</h1>
+            <a href="index.html" style="color: white;"><< Items</a>
+        </header>
+        <div class="search flex fl-column">
+            <!-- Search bar -->
+            <div>
+                <input type="text" id="search" onkeydown="checkEnterUpdate(event)" placeholder="Search for an item..." /><button onclick="update()" id="search-btn">Search</button>
+            </div>
+            <div>
+                Rarity:
+                <input type="checkbox" id="star0-filter" oncontextmenu="return false;" checked>
+                <label for="star0-filter">0 Stars</label>
+                <input type="checkbox" id="star1-filter" oncontextmenu="return false;" checked>
+                <label for="star1-filter">1 Star</label>
+                <input type="checkbox" id="star2-filter" oncontextmenu="return false;" checked>
+                <label for="star2-filter">2 Stars</label>
+                <input type="checkbox" id="star3-filter" oncontextmenu="return false;" checked>
+                <label for="star3-filter">3 Stars</label>
+            </div>
+            <div>
+                Category:
+                <input type="checkbox" id="alchemism-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="alchemism-filter">Alchemism</label>
+                <input type="checkbox" id="scribing-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="scribing-filter">Scribing</label>
+                <input type="checkbox" id="cooking-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="cooking-filter">Cooking</label>
+                <input type="checkbox" id="weaponsmithing-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="weaponsmithing-filter">Weaponsmithing</label>
+                <input type="checkbox" id="woodworking-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="woodworking-filter">Woodworking</label>
+                <input type="checkbox" id="tailoring-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="tailoring-filter">Tailoring</label>
+                <input type="checkbox" id="armouring-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="armouring-filter">Armouring</label>
+                <input type="checkbox" id="jeweling-filter" oncontextmenu="return false;" onmousedown="update(event)" checked>
+                <label for="jeweling-filter">Jeweling</label>
+            </div>
+            <div>
+                Sorting:
+                <select id="sort-type-filter">
+                    <option value="alphabetical" selected>Alphabetical</option>
+                    <option value="level">Level</option>
+                    <option value="agilityRequirement">Agility Requirement</option>
+                    <option value="defenceRequirement">Defense Requirement</option>
+                    <option value="dexterityRequirement">Dexterity Requirement</option>
+                    <option value="intelligenceRequirement">Intelligence Requirement</option>
+                    <option value="strengthRequirement">Strength Requirement</option>
+                    <option value="AGILITYPOINTS">Agility Bonus</option>
+                    <option value="DEFENSEPOINTS">Defense Bonus</option>
+                    <option value="DEXTERITYPOINTS">Dexterity Bonus</option>
+                    <option value="INTELLIGENCEPOINTS">Intelligence Bonus</option>
+                    <option value="STRENGTHPOINTS">Strength Bonus</option>
+                    <option value="pointsSum">Skill Points Sum</option>
+                    <option value="EMERALDSTEALING">Stealing</option>
+                    <option value="EXPLODING">Exploding</option>
+                    <option value="REFLECTION">Reflection</option>
+                    <option value="SOULPOINTS">Soul Point Regen</option>
+                    <option value="SPEED">Walk Speed</option>
+                    <option value="JUMP_HEIGHT">Jump Height</option>
+                    <option value="LOOTBONUS">Loot Bonus</option>
+                    <option value="LOOT_QUALITY">Loot Quality</option>
+                    <option value="XPBONUS">Combat XP Bonus</option>
+                    <option value="STAMINA">Sprint Duration</option>
+                    <option value="STAMINA_REGEN">Sprint Regen</option>
+                    <option value="THORNS">Thorns</option>
+                    <option value="POISON">Poison</option>
+                    <option value="HEALTHBONUS">Health Bonus</option>
+                    <option value="HEALTHREGEN">Health Regen %</option>
+                    <option value="HEALTHREGENRAW">Health Regen Raw</option>
+                    <option value="LIFESTEAL">Life Steal</option>
+                    <option value="MANAREGEN">Mana Regen</option>
+                    <option value="MANASTEAL">Mana Steal</option>
+                    <!--<option value="attackSpeed">Attack Speed</option>-->
+                    <option value="ATTACKSPEED">Attack Speed Bonus</option>
+                    <option value="AIRDAMAGEBONUS">Air Damage %</option>
+                    <option value="AIRDEFENSE">Air Defense %</option>
+                    <option value="EARTHDAMAGEBONUS">Earth Damage %</option>
+                    <option value="EARTHDEFENSE">Earth Defense %</option>
+                    <option value="FIREDAMAGEBONUS">Fire Damage %</option>
+                    <option value="FIREDEFENSE">Fire Defense %</option>
+                    <option value="THUNDERDAMAGEBONUS">Thunder Damage %</option>
+                    <option value="THUNDERDEFENSE">Thunder Defense %</option>
+                    <option value="WATERDAMAGEBONUS">Water Damage %</option>
+                    <option value="WATERDEFENSE">Water Defense %</option>
+                    <option value="DAMAGEBONUS">Main Attack Damage %</option>
+                    <option value="DAMAGEBONUSRAW">Main Attack Damage Raw</option>
+                    <option value="SPELLDAMAGE">Spell Damage %</option>
+                    <option value="SPELLDAMAGERAW">Spell Damage Raw</option>
+                    <option value="GATHER_SPEED">Gathering Speed %</option>
+                    <option value="GATHER_XP_BONUS">Gathering XP %</option>
+                </select>
+                <input type="checkbox" id="sort-invert-filter" checked>
+                <label for="sort-invert-filter">Descendant?</label>
+                &nbsp;&nbsp;&nbsp;
+                Level Range:
+                <input type="number" id="level-min-filter" value="0" onchange="checkAndUpdateLevelRange()">
+                -
+                <input type="number" id="level-max-filter" value="106" onchange="checkAndUpdateLevelRange()">
+            </div>
+            <div>
+                <button onclick="addFilter()">Add Filter</button>
+                <button onclick="resetFields()">Reset</button>
+            </div>
+            <div>
+                Filters:
+                <div id="filter-list"></div>
+            </div>
+        </div>
+        <div class="flex fl-row fl-wrap fl-space-around" id="items-display">
+            <div class="loader">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <script src="ingredientsMain.js"></script>
+        <script src="select2.js"></script>
+        <script src="sortIngredients.js"></script>
+    </body>
+</html>
