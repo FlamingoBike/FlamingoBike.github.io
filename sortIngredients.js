@@ -53,6 +53,42 @@ function customSort(a, b, types) {
                 }
                 break;
             }
+            case "durability": {
+                if (t["invert"]) {
+                    (a["itemOnlyIDs"]["durabilityModifier"] > b["itemOnlyIDs"]["durabilityModifier"]) ? toReturn = -1 : toReturn = 1;
+                } else {
+                    (a["itemOnlyIDs"]["durabilityModifier"] > b["itemOnlyIDs"]["durabilityModifier"]) ? toReturn = 1 : toReturn = -1;
+                }
+                break;
+            }
+            case "duration": {
+                if (a["consumableOnlyIDs"] && !b["consumableOnlyIDs"]) {
+                    return 1
+                } else if (!a["consumableOnlyIDs"] && b["consumableOnlyIDs"]) {
+                    return -1
+                } else {
+                    if (t["invert"]) {
+                        (a["consumableOnlyIDs"]["duration"] > b["consumableOnlyIDs"]["duration"]) ? toReturn = -1 : toReturn = 1;
+                    } else {
+                        (a["consumableOnlyIDs"]["duration"] > b["consumableOnlyIDs"]["duration"]) ? toReturn = 1 : toReturn = -1;
+                    }
+                }
+                break;
+            }
+            case "charges": {
+                if (a["consumableOnlyIDs"] && !b["consumableOnlyIDs"]) {
+                    return 1
+                } else if (!a["consumableOnlyIDs"] && b["consumableOnlyIDs"]) {
+                    return -1
+                } else {
+                    if (t["invert"]) {
+                        (a["consumableOnlyIDs"]["charges"] > b["consumableOnlyIDs"]["charges"]) ? toReturn = -1 : toReturn = 1;
+                    } else {
+                        (a["consumableOnlyIDs"]["charges"] > b["consumableOnlyIDs"]["charges"]) ? toReturn = 1 : toReturn = -1;
+                    }
+                }
+                break;
+            }
             default: {
                 if (aIDs[t["name"]] === 0) {
                     return 1;

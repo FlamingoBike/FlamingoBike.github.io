@@ -376,6 +376,21 @@ function applyFilters(searchStr) {
                         return false;
                     break;
                 }
+                case "durability": {
+                    if (!(i["itemOnlyIDs"]["durabilityModifier"] !== 0))
+                        return false;
+                    break;
+                }
+                case "duration": {
+                    if (!(i["consumableOnlyIDs"] && i["consumableOnlyIDs"]["duration"] !== 0))
+                        return false;
+                    break;
+                }
+                case "charges": {
+                    if (!(i["consumableOnlyIDs"] && i["consumableOnlyIDs"]["charges"] !== 0))
+                        return false;
+                    break;
+                }
                 default: {
                     if (!i["identifications"][f["name"]])
                         return false;
@@ -463,8 +478,6 @@ function addFilter() {
     }
     if (!alreadyAdded) {
         filters.push({name: filterName, invert: filterInvert});
-        console.log(`added filter ${filterName}`);
-        //console.log(filters);
         updateFilterList();
         update();
     }
