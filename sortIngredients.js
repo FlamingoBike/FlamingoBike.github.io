@@ -89,6 +89,22 @@ function customSort(a, b, types) {
                 }
                 break;
             }
+            case "totalEffectiveness": {
+                if (a["ingredientPositionModifiers"] && !b["ingredientPositionModifiers"]) {
+                    return 1
+                } else if (!a["ingredientPositionModifiers"] && b["ingredientPositionModifiers"]) {
+                    return -1
+                } else {
+                    aEff = a["ingredientPositionModifiers"]["left"] + a["ingredientPositionModifiers"]["right"] + a["ingredientPositionModifiers"]["above"] + a["ingredientPositionModifiers"]["under"] + a["ingredientPositionModifiers"]["touching"] + a["ingredientPositionModifiers"]["notTouching"];
+                    bEff = b["ingredientPositionModifiers"]["left"] + b["ingredientPositionModifiers"]["right"] + b["ingredientPositionModifiers"]["above"] + b["ingredientPositionModifiers"]["under"] + b["ingredientPositionModifiers"]["touching"] + b["ingredientPositionModifiers"]["notTouching"];
+                    if (t["invert"]) {
+                        (aEff > bEff) ? toReturn = -1 : toReturn = 1;
+                    } else {
+                        (aEff > bEff) ? toReturn = 1 : toReturn = -1;
+                    }
+                }
+                break;
+            }
             default: {
                 if (aIDs[t["name"]] === 0) {
                     return 1;

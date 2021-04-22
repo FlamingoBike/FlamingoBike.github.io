@@ -391,6 +391,10 @@ function applyFilters(searchStr) {
                         return false;
                     break;
                 }
+                case "totalEffectiveness": {
+                    if (!(i["ingredientPositionModifiers"] && i["ingredientPositionModifiers"]["left"] === 0 && i["ingredientPositionModifiers"]["right"] === 0 && i["ingredientPositionModifiers"]["above"] === 0 && i["ingredientPositionModifiers"]["under"] === 0 && i["ingredientPositionModifiers"]["touching"] === 0 && i["ingredientPositionModifiers"]["notTouching"] === 0))
+                    break;
+                }
                 default: {
                     if (!i["identifications"][f["name"]])
                         return false;
