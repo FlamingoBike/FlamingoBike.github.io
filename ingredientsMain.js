@@ -417,7 +417,7 @@ function update() {
 }
 
 function fixIngredients() {
-    fetch("./baseingredients.json").then((data) => {
+    fetch("./iiingredients.json").then((data) => {
         data.json().then((data) => {
             for (const ing of data) {
                 // Change all "minimum"s to "min"s and "maximum"s to "max"s
@@ -441,7 +441,8 @@ function finishedLoading() {
 }
 
 function requestIngredients() {
-    fetch("./formattedingredients.json").then((data) => {
+    //fixIngredients();
+    fetch("./iiingredients.json").then((data) => {
         data.json().then((data) => {
             allIngredients = data;
             //console.log(allIngredients);

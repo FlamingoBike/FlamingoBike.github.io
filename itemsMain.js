@@ -343,6 +343,21 @@ function updateItemDisplay(itemsToDisplay) {
                     div_item += `<p class="majorid-desc">Double your sprint speed when your sprint bar is under 30%.</p>`;
                     break;
                 }
+                case "FLASHFREEZE": {
+                    div_item += `<p class="majorid-title">Flash Freeze:</p>`;
+                    div_item += `<p class="majorid-desc">Ice Snake is instant but has a reduced range.</p>`;
+                    break;
+                }
+                case "FURIOUS_EFFIGY": {
+                    div_item += `<p class="majorid-title">Furious Effigy:</p>`;
+                    div_item += `<p class="majorid-desc">Totem effects are twice as fast, but duration is halved.</p>`;
+                    break;
+                }
+                case "PEACEFUL_EFFIGY": {
+                    div_item += `<p class="majorid-title">Peaceful Effigy:</p>`;
+                    div_item += `<p class="majorid-desc">Your Totem will last twice as long.</p>`;
+                    break;
+                }
             }
         }
 
@@ -625,7 +640,7 @@ function finishedLoading() {
 }
 
 function requestItems() {
-    fetch("./newapiitems.json").then((data) => {
+    fetch("./iiitems.json").then((data) => {
         data.json().then((data) => {
             allItems = data;
             //convertIds();
