@@ -609,9 +609,9 @@ function update() {
     updateItemDisplay(applyFilters(searchField.value));
 }
 
-function convertIds() {
+function convertIds(itemsToModify) {
     for (const id of idsToModify) {
-        for (const item of allItems) {
+        for (const item of itemsToModify) {
             if (item[id] && item[id] !== 0) {
                 if (item["identified"] === false || item["identified"] === undefined) {
                     if (item[id] > 0) {
@@ -631,6 +631,19 @@ function convertIds() {
             }
         }
     }
+    return itemsToModify;
+}
+
+function generateNewItemfile() {
+    $.ajax({
+        url: "https://api.wynncraft.com/public_api.php?action=itemDB&category=all",
+        success: (data) => {
+            let bunchofitems = data["items"];
+            bunchofitems = convertIds(bunchofitems);
+            // Cant post to local so just copy object from the console.
+            console.log(bunchofitems);
+        }
+    });
 }
 
 function finishedLoading() {
@@ -639,67 +652,31 @@ function finishedLoading() {
     update();
 }
 
+// Switch between generate and display without having to comment code.
+let MODE = 0;
 function requestItems() {
-    fetch("./iiitems.json").then((data) => {
-        data.json().then((data) => {
-            allItems = data;
-            //convertIds();
-            //console.log(allItems);
-            finishedLoading();
-        })
-    })
-    isLoaded();
+    switch (MODE) {
+        case 0: {
+            fetch("./currentitems.json").then((data) => {
+                data.json().then((data) => {
+                    console.log(data);
+                    allItems = data;
+                    finishedLoading();
+                })
+            })
+            isLoaded();
+            break;
+        }
+        case 1: {
+            generateNewItemfile();
+            break;
+        }
+    }
 }
 
 $(document).ready(function () {
     $('#sort-type-filter').select2();
 });
-
-/*function requestItems() {
-    $.ajax({
-        url: "https://api.wynncraft.com/public_api.php?action=itemDB&category=all",
-        success: (data) => {
-            allItems = data["items"];
-            convertIds();
-            console.log(allItems);
-            //finishedLoading();
-            //let apiItems = data["items"];
-
-            fetch("./test.json").then((data) => {
-                data.json().then((hppengItems) => {
-                    fetch("./itemdata.json").then((data) => {
-                        data.json().then((newItems) => {
-                            //console.log(data);
-                            //allItems = data;
-                            for (const item of hppengItems) {
-                                if (item["name"].includes("(1.20)")) {
-                                    //let targetItemPos = apiItems.indexOf(apiItems.find((i) => { return i["name"] === item["name"].substr(0, item["name"].length - 7)}));
-                                    //if (apiItems[targetItemPos] !== undefined) {
-                                        //for (const key in item) {
-                                            //apiItems[targetItemPos][key] = item[key];
-                                        //}
-                                    //} else {
-                                        //apiItems.push(item);
-                                    //}
-                                    let found = newItems.find((i) => {return i["name"] === item["name"]})
-                                    if (!found) {
-                                        console.log(item["name"]);
-                                    }
-                                }
-                            }
-                            //console.log(apiItems);
-                            //allItems = apiItems;
-                            //convertIds();
-                            //finishedLoading()
-                        })
-                    })
-                })
-            })
-
-        }
-    });
-    isLoaded();
-}*/
 
 function isLoaded() {
     let itemsDisplay = document.querySelector('#items-display');
@@ -729,7 +706,6 @@ function addFilter() {
     }
     if (!alreadyAdded) {
         filters.push({name: filterName, invert: filterInvert});
-        //console.log(filters);
         updateFilterList();
         update();
     }
@@ -850,4 +826,37 @@ function filterArmor() {
 
 function debug(name) {
     console.log(allItems.find((i) => {return i["name"] === name}));
+}
+
+function convertHPPENG() {
+    fetch("./test.json").then((data) => {
+        data.json().then((hppengItems) => {
+            fetch("./itemdata.json").then((data) => {
+                data.json().then((newItems) => {
+                    //console.log(data);
+                    //allItems = data;
+                    for (const item of hppengItems) {
+                        if (item["name"].includes("(1.20)")) {
+                            //let targetItemPos = apiItems.indexOf(apiItems.find((i) => { return i["name"] === item["name"].substr(0, item["name"].length - 7)}));
+                            //if (apiItems[targetItemPos] !== undefined) {
+                                //for (const key in item) {
+                                    //apiItems[targetItemPos][key] = item[key];
+                                //}
+                            //} else {
+                                //apiItems.push(item);
+                            //}
+                            let found = newItems.find((i) => {return i["name"] === item["name"]})
+                            if (!found) {
+                                console.log(item["name"]);
+                            }
+                        }
+                    }
+                    //console.log(apiItems);
+                    //allItems = apiItems;
+                    //convertIds();
+                    //finishedLoading()
+                })
+            })
+        })
+    })
 }

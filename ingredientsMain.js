@@ -416,21 +416,38 @@ function update() {
     updateIngredientDisplay(applyFilters(searchField.value));
 }
 
-function fixIngredients() {
-    fetch("./iiingredients.json").then((data) => {
+function fixIngredients(ingredients) {
+    for (const ing of ingredients) {
+        // Change all "minimum"s to "min"s and "maximum"s to "max"s
+        for (const id in ing["identifications"]) {
+            ing["identifications"][id]["min"] = ing["identifications"][id]["minimum"];
+            ing["identifications"][id]["max"] = ing["identifications"][id]["maximum"];
+            delete ing["identifications"][id]["minimum"];
+            delete ing["identifications"][id]["maximum"];
+        }
+    }
+    
+    return ingredients;
+}
+
+function fixIngredientsFromFile() {
+    fetch("./currentingredients.json").then((data) => {
         data.json().then((data) => {
-            for (const ing of data) {
-                // Change all "minimum"s to "min"s and "maximum"s to "max"s
-                for (const id in ing["identifications"]) {
-                    ing["identifications"][id]["min"] = ing["identifications"][id]["minimum"];
-                    ing["identifications"][id]["max"] = ing["identifications"][id]["maximum"];
-                    delete ing["identifications"][id]["minimum"];
-                    delete ing["identifications"][id]["maximum"];
-                }
-            }
-            
-            console.log(data);
-        });
+            let ings = fixIngredients(data);
+            console.log(ings);
+        })
+    })
+}
+
+function generateNewIngredientFile() {
+    $.ajax({
+        url: "https://api.wynncraft.com/v2/ingredient/search/skills/^scribing,jeweling,alchemism,cooking,weaponsmithing,tailoring,woodworking,armouring",
+        success: (data) => {
+            let bunchofingredients = data["data"];
+            bunchofingredients = fixIngredients(bunchofingredients);
+            // Cant post to local so just copy object from the console.
+            console.log(bunchofingredients);
+        }
     });
 }
 
@@ -440,16 +457,29 @@ function finishedLoading() {
     update();
 }
 
+let MODE = 0;
 function requestIngredients() {
-    //fixIngredients();
-    fetch("./iiingredients.json").then((data) => {
-        data.json().then((data) => {
-            allIngredients = data;
-            //console.log(allIngredients);
-            finishedLoading();
-        })
-    })
-    isLoaded();
+    switch (MODE) {
+        case 0: {
+            fetch("./currentingredients.json").then((data) => {
+                data.json().then((data) => {
+                    allIngredients = data;
+                    finishedLoading();
+                })
+            })
+            isLoaded();
+            break;
+        }
+        case 1: {
+            generateNewIngredientFile();
+            break;
+        }
+        case 2: {
+            fixIngredientsFromFile();
+            break;
+        }
+    }
+
 }
 
 function isLoaded() {
