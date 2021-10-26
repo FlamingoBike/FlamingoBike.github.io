@@ -358,6 +358,11 @@ function updateItemDisplay(itemsToDisplay) {
                     div_item += `<p class="majorid-desc">Your Totem will last twice as long.</p>`;
                     break;
                 }
+                case "GEOCENTRISM": {
+                    div_item += `<p class="majorid-title">Geocentrism:</p>`;
+                    div_item += `<p class="majorid-desc">Aura radiates from you instead of your Totem and can be cast any time.</p>`;
+                    break;
+                }
             }
         }
 
